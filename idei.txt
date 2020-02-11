@@ -1,0 +1,26 @@
+Game Dev Ideas
+
+- Joc tip platforma
+- Personaj principal cu abilitate de sarit si boost (double/triple jump) daca atinge suprafata de joc in zona safe sau daca colecteaza un reward(diamant sau altceva)
+- Cand jucatorul atinge o zona pe care nu are voie sa stea atunci primeste un jump in spate sau in sus/jos si viata lui va scadea cu 1/3
+- Reward-urile se aduna ca si puncte si se compara in tabelul de scoruri cu ceilalti jucatori, fiind un top 1..numarul de jucatori
+- Jocul sa fie incadrat intr-un border si sa nu poti iesi din mapa cu posibilitatea sa te intorci pe partea opusa
+
+- IDEE: sa construim jocul pe principiul un vulcan in background in care tu incepi de la baza lui si trebuie sa urci cat mai sus pana in varf. 
+- Vulcanul erupe si vor fi bucati de lava care vor cadea random + ca suprafata de joc va avea si ea lava in anumite zone, denumita si suprafata pe care nu are voie sa calce si la atingerea ei ia damage 1/3 si primeste jump
+- Cand jucatorul ajunge aproape de varful vulcanului va arunca un diamant de dimensiune proportionala cu scorul acestuia si daca diamantul acopera gaura vulcanului acesta va sfarsi jocul victorios stand pe diamant, altfel va cadea in vulcan cu tot cu diamant
+
+- EXTRA IDEE: putem pune la baza vulcanului assets cu un sat cu oameni si la fiecare interval de timp sa moara cativa oameni din cauza lavei, astfel chiar daca un jucator acopera gura vulcanului conteaza si timpul in care o face astfel incat sa ramana cati mai multi locuitori ai satului in viata, scorul final fiind o combinatie de puncte colectate din reward-uri si numarul de sateni salvati
+
+- Ca si abilitati/mechanics:
+    - Jump - SPACE
+    - Movement - L/R/U/D - ARROWS
+    - Boost
+    - Damage animation
+    - Fall
+    - Reward collection
+    - Still natural movement
+- Mechanics ideas:
+    - Lava falling down
+    - Lava collision
+    - Throw diamont into vulano and fit or fall„
