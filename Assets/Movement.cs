@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     [Header("Checks")]
     public bool canMove;
     public bool isDashing;
+    public bool wallGrab;
 
     [Space]
 
@@ -47,7 +48,6 @@ public class Movement : MonoBehaviour
 
         Walk(dir);
 
-        rb.gravityScale = 3;
 
         if (coll.onGround && !isDashing)
         {
@@ -60,25 +60,45 @@ public class Movement : MonoBehaviour
                 Jump(Vector2.up);
         }
 
-        if(Input.GetButtonDown("Boost")&&!hasDashed)
+        if (Input.GetButtonDown("Boost") && !hasDashed)
         {
             if (xRaw != 0 || yRaw != 0)
                 Dash(xRaw, yRaw);
         }
 
-        
+        if (Input.GetButtonDown("Grab") && coll.onWall && canMove)
+        {
+            wallGrab = true;
+        }
+        if (Input.GetButtonUp("Grab") || !coll.onWall || !canMove)
+        {
+            wallGrab = false;
+        }
+        if (wallGrab && !isDashing)
+        {
+            rb.gravityScale = 0;
+            if (x > .2f || x < -.2f)
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            float speedModifier = y > 0 ? .5f : 1;
 
-        if(coll.onGround && !groundTouch)
+            rb.velocity = new Vector2(rb.velocity.x, y * (speed * speedModifier));
+        }
+        else
+        { rb.gravityScale = 3; }
+
+
+        if (coll.onGround && !groundTouch)
         {
             GroundTouch();
             groundTouch = true;
         }
 
-        if(!coll.onGround && groundTouch)
+        if (!coll.onGround && groundTouch)
         {
             groundTouch = false;
         }
-
+        if (wallGrab || !canMove)
+            return;
 
     }
     void GroundTouch()

@@ -1219,6 +1219,7 @@ MonoBehaviour:
   dashSpeed: 20
   canMove: 1
   isDashing: 0
+  wallGrab: 0
 --- !u!114 &1108090496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,8 +1250,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   onGround: 0
+  onWall: 0
+  onRightWall: 0
+  onLeftWall: 0
   collisionRadius: 0.25
   bottomOffset: {x: 0, y: -0.51}
+  rightOffset: {x: 0.54, y: 0}
+  leftOffset: {x: -0.5, y: 0}
 --- !u!1 &1157980954
 GameObject:
   m_ObjectHideFlags: 0
