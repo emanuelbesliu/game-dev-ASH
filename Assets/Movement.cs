@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     private Collision coll;
     [HideInInspector]
     public Rigidbody2D rb;
+    private float time;
 
     [Space]
     [Header("Forces")]
@@ -14,13 +15,14 @@ public class Movement : MonoBehaviour
     public float wallJumpLerp = 10;
     public float jumpForce = 15;
     public float dashSpeed = 20;
-
+    public float slideSpeed = 5;
 
     [Space]
     [Header("Checks")]
     public bool canMove;
     public bool isDashing;
     public bool wallGrab;
+    public bool wallSlide;
 
     [Space]
 
@@ -59,6 +61,9 @@ public class Movement : MonoBehaviour
             if (coll.onGround)
                 Jump(Vector2.up);
         }
+        if(!wallSlide && !wallGrab){
+            GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        }
 
         if (Input.GetButtonDown("Boost") && !hasDashed)
         {
@@ -69,10 +74,12 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Grab") && coll.onWall && canMove)
         {
             wallGrab = true;
+            wallSlide = false;
         }
         if (Input.GetButtonUp("Grab") || !coll.onWall || !canMove)
         {
             wallGrab = false;
+            wallSlide = false;
         }
         if (wallGrab && !isDashing)
         {
@@ -85,6 +92,21 @@ public class Movement : MonoBehaviour
         }
         else
         { rb.gravityScale = 3; }
+
+        if(!coll.onGround && coll.onWall && !wallGrab){
+            time = Time.time;
+        }
+
+        if(coll.onWall && !coll.onGround && wallGrab){
+            //Debug.Log("elapsed time: " + (Time.time - time));
+            if((Time.time - time) >= 3){
+                wallSlide = true;
+                GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                WallSlide();
+            }
+        }
+
+        if(!coll.onWall || coll.onGround) wallSlide = false;
 
 
         if (coll.onGround && !groundTouch)
@@ -129,6 +151,24 @@ public class Movement : MonoBehaviour
 
         rb.velocity += dir.normalized * dashSpeed;
         StartCoroutine(DashWait());
+    }
+
+    private void WallSlide(){
+        if(!canMove) return;
+
+        bool pushingWall = false;
+
+        if((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall)){
+            pushingWall = true;
+        }
+
+        float push = pushingWall ? 0 : rb.velocity.x;
+
+        rb.velocity = new Vector2(push, -slideSpeed);
+
+        wallGrab = false;
+
+        //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
     }
 
     IEnumerator DashWait()
