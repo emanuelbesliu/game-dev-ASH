@@ -58,17 +58,25 @@ public class Movement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (coll.onGround)
+            if (coll.onGround){
+                //rb.gravityScale = 3;
                 Jump(Vector2.up);
+
+            }
+
         }
-        if(!wallSlide && !wallGrab){
+
+        if(!wallSlide && !wallGrab && !isDashing){
             GetComponent<Renderer>().material.color = new Color(255, 255, 255);
         }
 
         if (Input.GetButtonDown("Boost") && !hasDashed)
         {
-            if (xRaw != 0 || yRaw != 0)
+            if (xRaw != 0 || yRaw != 0){
+                GetComponent<Renderer>().material.color = new Color(0,191,255);
                 Dash(xRaw, yRaw);
+                //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            }
         }
 
         if (Input.GetButtonDown("Grab") && coll.onWall && canMove)
@@ -81,6 +89,7 @@ public class Movement : MonoBehaviour
             wallGrab = false;
             wallSlide = false;
         }
+
         if (wallGrab && !isDashing)
         {
             rb.gravityScale = 0;
@@ -89,9 +98,14 @@ public class Movement : MonoBehaviour
             float speedModifier = y > 0 ? .5f : 1;
 
             rb.velocity = new Vector2(rb.velocity.x, y * (speed * speedModifier));
+            JumpWhileWall();
         }
         else
-        { rb.gravityScale = 3; }
+        { 
+            rb.gravityScale = 3; 
+
+            JumpWhileWall();
+        }
 
         if(!coll.onGround && coll.onWall && !wallGrab){
             time = Time.time;
@@ -119,6 +133,7 @@ public class Movement : MonoBehaviour
         {
             groundTouch = false;
         }
+
         if (wallGrab || !canMove)
             return;
 
@@ -153,6 +168,14 @@ public class Movement : MonoBehaviour
         StartCoroutine(DashWait());
     }
 
+    private void JumpWhileWall(){
+        if (Input.GetButtonDown("Jump")){
+            wallGrab =  false;
+            rb.gravityScale = 3;
+            Jump(Vector2.up);
+        }
+    }
+
     private void WallSlide(){
         if(!canMove) return;
 
@@ -164,9 +187,15 @@ public class Movement : MonoBehaviour
 
         float push = pushingWall ? 0 : rb.velocity.x;
 
-        rb.velocity = new Vector2(push, -slideSpeed);
-
+        //rb.velocity = new Vector2(push, -slideSpeed);
+        if (Input.GetButtonDown("Jump")){
+            //wallGrab =  false;
+            rb.gravityScale = 3;
+            Jump(Vector2.up);
+        }
         wallGrab = false;
+
+
 
         //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
     }
