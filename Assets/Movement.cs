@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Tilemap tilemap;
+
     private Collision coll;
     [HideInInspector]
     public Rigidbody2D rb;
@@ -23,18 +26,23 @@ public class Movement : MonoBehaviour
     public bool isDashing;
     public bool wallGrab;
     public bool wallSlide;
+    public bool lavaCollide;
 
     [Space]
 
     private bool groundTouch;
     private bool hasDashed;
+    private bool lavaTouch;
 
+    private Vector3 playerPos;
+    
 
     void Start()
     {
         coll = GetComponent<Collision>();
         rb = GetComponent<Rigidbody2D>();
         canMove = true;
+        playerPos = transform.position;
     }
 
     // Update is called once per frame
@@ -56,21 +64,45 @@ public class Movement : MonoBehaviour
             GetComponent<Jump>().enabled = true;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if(coll.hitObject && canMove){
+          GroundTouch();
+        }
+
+        if(coll.onLava && canMove){
+            lavaCollide = true;
+            GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+2);
+            StartCoroutine(DisableMovement(.4f));
+        }else if(coll.onLavaLeft){
+            lavaCollide = true;
+            GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+            rb.velocity = new Vector2(rb.velocity.x+2, rb.velocity.y);
+            StartCoroutine(DisableMovement(.4f));
+        }else if(coll.onLavaRight){
+            lavaCollide = true;
+            GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+            rb.velocity = new Vector2(rb.velocity.x-2, rb.velocity.y);
+            StartCoroutine(DisableMovement(.4f));
+        }else if(coll.onLavaUp){
+            lavaCollide = true;
+            GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y-2);
+            StartCoroutine(DisableMovement(.4f));
+        }
+
+        if (Input.GetButtonDown("Jump") && canMove)
         {
             if (coll.onGround){
                 //rb.gravityScale = 3;
                 Jump(Vector2.up);
-
             }
-
         }
 
-        if(!wallSlide && !wallGrab && !isDashing){
+        if(!wallSlide && !wallGrab && !isDashing && !lavaCollide){
             GetComponent<Renderer>().material.color = new Color(255, 255, 255);
         }
 
-        if (Input.GetButtonDown("Boost") && !hasDashed)
+        if (Input.GetButtonDown("Boost") && !hasDashed && canMove)
         {
             if (xRaw != 0 || yRaw != 0){
                 GetComponent<Renderer>().material.color = new Color(0,191,255);
@@ -90,7 +122,7 @@ public class Movement : MonoBehaviour
             wallSlide = false;
         }
 
-        if (wallGrab && !isDashing)
+        if (wallGrab && !isDashing && canMove)
         {
             rb.gravityScale = 0;
             if (x > .2f || x < -.2f)
@@ -103,8 +135,8 @@ public class Movement : MonoBehaviour
         else
         { 
             rb.gravityScale = 3; 
-
-            JumpWhileWall();
+            if(coll.onWall)
+                JumpWhileWall();
         }
 
         if(!coll.onGround && coll.onWall && !wallGrab){
@@ -136,8 +168,8 @@ public class Movement : MonoBehaviour
 
         if (wallGrab || !canMove)
             return;
-
     }
+
     void GroundTouch()
     {
         hasDashed = false;
@@ -176,6 +208,29 @@ public class Movement : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Reset")
+        {
+            Vector3 hitPosition = Vector3.zero;
+            foreach (ContactPoint2D hit in collision.contacts){
+                //Debug.Log(hit.point);
+                hitPosition.x = hit.point.x - 0.1f;
+                hitPosition.y = hit.point.y - 0.1f;
+                Vector3Int cell = new Vector3Int((int)hitPosition.x, (int)hitPosition.y, 0);
+
+                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
+
+                hitPosition.x = hit.point.x + 0.1f;
+                hitPosition.y = hit.point.y + 0.1f;
+
+                cell = new Vector3Int((int)hitPosition.x, (int)hitPosition.y, 0);
+
+                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
+            }
+        }
+    }
+
     private void WallSlide(){
         if(!canMove) return;
 
@@ -195,13 +250,10 @@ public class Movement : MonoBehaviour
         }
         wallGrab = false;
 
-
-
         //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
     }
 
-    IEnumerator DashWait()
-    {
+    IEnumerator DashWait(){
         StartCoroutine(GroundDash());
 
         rb.gravityScale = 0;
@@ -224,7 +276,12 @@ public class Movement : MonoBehaviour
     IEnumerator DisableMovement(float time)
     {
         canMove = false;
+
         yield return new WaitForSeconds(time);
+        
+        transform.position = playerPos;
         canMove = true;
+
+        if(lavaCollide) lavaCollide = false;
     }
 }
