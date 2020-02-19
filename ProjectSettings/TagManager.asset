@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Reset
+  - Lava
   layers:
   - Default
   - TransparentFX
