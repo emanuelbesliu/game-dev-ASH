@@ -59,6 +59,7 @@
      <Compile Include="Assets\Cubes.cs" />
      <Compile Include="Assets\DashMove.cs" />
      <Compile Include="Assets\Jump.cs" />
+     <Compile Include="Assets\LavaCollide.cs" />
      <Compile Include="Assets\Movement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/emanuelbesliu/Documents/University of Southampton DOCS/3rd Year/COMP3218/Game-Dev-Coursework/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

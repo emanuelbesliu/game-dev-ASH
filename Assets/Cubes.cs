@@ -31,6 +31,6 @@ public class Cubes : MonoBehaviour
     }
 
     void Spawn(){
-    	Instantiate(cube, new Vector3(Random.Range(-54, 60), 30, 0), Quaternion.identity);
+    	Instantiate(cube, new Vector3(Random.Range(-45, 51), 30, 0), Quaternion.identity);
     }
 }

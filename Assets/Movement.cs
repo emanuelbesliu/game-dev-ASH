@@ -65,7 +65,19 @@ public class Movement : MonoBehaviour
         }
 
         if(coll.hitObject && canMove){
-          GroundTouch();
+            GroundTouch();
+        }
+
+        foreach(GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
+            if(coll.onLava || coll.onLavaRight || coll.onLavaLeft || coll.onLavaUp){
+                if(gos.name == "Lav(Clone)"){
+                    Destroy(gos);
+                }
+                lavaCollide = true;
+                GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+2);
+                StartCoroutine(DisableMovement(.4f));  
+            }       
         }
 
         if(coll.onLava && canMove){
@@ -137,6 +149,11 @@ public class Movement : MonoBehaviour
             rb.gravityScale = 3; 
             if(coll.onWall)
                 JumpWhileWall();
+        }
+
+        if(coll.onWall && hasDashed){
+            hasDashed = false;
+            isDashing = false;
         }
 
         if(!coll.onGround && coll.onWall && !wallGrab){
@@ -215,14 +232,14 @@ public class Movement : MonoBehaviour
             Vector3 hitPosition = Vector3.zero;
             foreach (ContactPoint2D hit in collision.contacts){
                 //Debug.Log(hit.point);
-                hitPosition.x = hit.point.x - 0.1f;
-                hitPosition.y = hit.point.y - 0.1f;
+                hitPosition.x = hit.point.x - 0.2f;
+                hitPosition.y = hit.point.y - 0.2f;
                 Vector3Int cell = new Vector3Int((int)hitPosition.x, (int)hitPosition.y, 0);
 
                 tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
 
-                hitPosition.x = hit.point.x + 0.1f;
-                hitPosition.y = hit.point.y + 0.1f;
+                hitPosition.x = hit.point.x + 0.2f;
+                hitPosition.y = hit.point.y + 0.2f;
 
                 cell = new Vector3Int((int)hitPosition.x, (int)hitPosition.y, 0);
 
