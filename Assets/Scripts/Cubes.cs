@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
+    public bool lavaFall = false;
 	public float delay = 0.1f;
 	public float destroyCube = -70;
 	public GameObject cube;
@@ -31,6 +32,7 @@ public class Cubes : MonoBehaviour
     }
 
     void Spawn(){
-    	Instantiate(cube, new Vector3(Random.Range(-45, 51), 30, 0), Quaternion.identity);
+        if(lavaFall)
+    	    Instantiate(cube, new Vector3(Random.Range(-45, 51), 30, 0), Quaternion.identity);
     }
 }

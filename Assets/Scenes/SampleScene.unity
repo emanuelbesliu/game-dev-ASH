@@ -2914,7 +2914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270217184}
   m_LocalRotation: {x: -0, y: 0.0032935953, z: -0, w: 0.99999464}
-  m_LocalPosition: {x: -27.2, y: -52.34, z: -106.66}
+  m_LocalPosition: {x: -28.52, y: -46.8, z: -106.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2953,7 +2953,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 7.4
+  field of view: 15.1
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2983,6 +2983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd98e1c5e672401ea5e3f4ec6fec3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lavaFall: 0
   delay: 0.5
   destroyCube: -70
   cube: {fileID: 1922319917}
@@ -3040,7 +3041,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  refractionStrength: 0.5
+  refractionStrength: 1
   reflectionColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   reflectionStrength: 0.397
   waveSpeed: 1.3

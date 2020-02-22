@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
     public float jumpForce = 15;
     public float dashSpeed = 30;
     public float slideSpeed = 5;
+    public float grabTime = 2;
 
     [Space]
     [Header("Checks")]
@@ -196,7 +197,7 @@ public class Movement : MonoBehaviour
         if(!coll.onGround && wallGrab){
 
             //Debug.Log("elapsed time: " + (Time.time - time));
-            if((Time.time - time) >= 3){
+            if((Time.time - time) >= grabTime){
                 wallSlide = true;
                 sp.color = new Color(255, 0, 0);
                 WallSlide();
