@@ -31,6 +31,8 @@ public class Movement : MonoBehaviour
     public bool wallSlide;
     public bool lavaCollide;
     public bool firstGrab;
+    public bool tutorial = true;
+    public bool checkTutorial = false;
 
     [Space]
 
@@ -75,8 +77,19 @@ public class Movement : MonoBehaviour
         /*if(coll.hitObject && canMove){
             GroundTouch();
         }*/
-
-        foreach(GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
+        if (transform.position.y < -30)
+        {
+            rb.velocity = new Vector2(0, 0);
+            transform.position = playerPos;
+            tutorial = true;
+            checkTutorial = false;
+            GetComponent<TutorialFall>().detectionFall.gameObject.SetActive(true);
+            GetComponent<TutorialFall>().timestop.gameObject.SetActive(true);
+            GetComponent<TutorialFall>().platform.gravityScale = 0;
+            GetComponent<TutorialFall>().platform.gameObject.SetActive(true);
+            GetComponent<TutorialFall>().platform.transform.position = GetComponent<TutorialFall>().platformPosition;
+        }
+        foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
             if (coll.onLava || coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp)
             {
                 if(gos.name == "Lav(Clone)"){
@@ -139,8 +152,13 @@ public class Movement : MonoBehaviour
             sp.color = defaultCol;
         }
 
-        if (Input.GetButtonDown("Boost") && !hasDashed && canMove)
+        if (Input.GetButtonDown("Boost") && !hasDashed && !tutorial)
         {
+            if(!tutorial)
+            {
+                canMove = true;
+                checkTutorial = false;
+            }
             wallGrab = false;
             if (xRaw != 0 || yRaw != 0){
                 sp.color = new Color(0,191,255);
@@ -175,7 +193,8 @@ public class Movement : MonoBehaviour
         }
         else
         { 
-            rb.gravityScale = 3; 
+            if(!checkTutorial)
+                rb.gravityScale = 3; 
             if(coll.onWall)
                 JumpWhileWall();
         }
