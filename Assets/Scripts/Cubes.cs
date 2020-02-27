@@ -5,9 +5,12 @@ using UnityEngine;
 public class Cubes : MonoBehaviour
 {
     public bool lavaFall = false;
-	public float delay = 0.1f;
-	public float destroyCube = -70;
-	public GameObject cube;
+	public float delay = 2f;
+	public float destroyCube = -15;
+    bool random;
+    public GameObject cube;
+    public GameObject cube2;
+    public float gravity = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +21,12 @@ public class Cubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    	foreach(GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
-    		if(gos.name == "Lav(Clone)" && gos.transform.position.y > -300 && gos.GetComponent<Rigidbody2D>().gravityScale == 0){
-    			gos.GetComponent<Rigidbody2D>().gravityScale = 0.3f;
+        foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
+    		if((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.transform.position.y > -300 && gos.GetComponent<Rigidbody2D>().gravityScale == 0){
+    			gos.GetComponent<Rigidbody2D>().gravityScale = gravity;
     		}
 
-      		if(gos.name == "Lav(Clone)" && gos.transform.position.y < destroyCube){
+      		if((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.transform.position.y < destroyCube){
       			//Debug.Log(gos.transform.position.y);
     			Destroy(gos);
       		}
@@ -32,7 +34,15 @@ public class Cubes : MonoBehaviour
     }
 
     void Spawn(){
-        if(lavaFall)
-    	    Instantiate(cube, new Vector3(Random.Range(-45, 51), 30, 0), Quaternion.identity);
+        random = (Random.value > 0.5f);
+        if (lavaFall)
+            if(random)
+    	        Instantiate(cube, new Vector3(Random.Range(-9.52f, 41.05f), 30, 0), Quaternion.identity);
+            else
+                Instantiate(cube2, new Vector3(Random.Range(-9.52f, 41.05f), 30, 0), Quaternion.identity);
+    }
+    public void LavaTutorial()
+    {      
+        Instantiate(cube2, new Vector3(7f, 30, 0), Quaternion.identity);
     }
 }

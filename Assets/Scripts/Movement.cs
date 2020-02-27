@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
     private bool lavaTouch;
     public bool side = true;
 
-    private Vector3 playerPos;
+    public Vector3 playerPos;
     
 
     void Start()
@@ -97,12 +97,13 @@ public class Movement : MonoBehaviour
                 }
                 lavaCollide = true;
                 sp.color = new Color(255, 0, 0);
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+2);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+0.5f);
                 StartCoroutine(DisableMovement(.4f));  
             }       
         }
         if ((coll.onLava|| coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp) && canMove)
         {
+            Debug.Log("Helloooooo");
             lavaCollide = true;
             sp.color = new Color(255, 0, 0);
             if (coll.onLava && canMove)
