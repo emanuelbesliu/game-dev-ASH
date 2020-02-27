@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     private Color defaultCol;
     private Collision coll;
     private Animations anim;
+    public Ghost ghost;
     [HideInInspector]
     public Rigidbody2D rb;
     private float time;
@@ -175,8 +176,10 @@ public class Movement : MonoBehaviour
         {
             if (side != coll.wallSide)
                 anim.Flip(side == true ? false : true);
-            wallGrab = true;
-            wallSlide = false;
+            if(!wallSlide){
+                wallGrab = true;
+                wallSlide = false;
+            }
         }
         if (Input.GetButtonUp("Grab") || !coll.onWall || !canMove)
         {
@@ -248,6 +251,10 @@ public class Movement : MonoBehaviour
             side = true;
             anim.Flip(side);
         }
+
+        if(!isDashing){
+            ghost.makeGhost = false; 
+        }
         
         if(x<0)
         {
@@ -272,13 +279,16 @@ public class Movement : MonoBehaviour
     }
 
     private void Jump(Vector2 dir)
-    {
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.velocity += dir * jumpForce;
+    {   
+        if((Time.time - time) < grabTime){
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.velocity += dir * jumpForce;
+        }
     }
 
     private void Dash(float x, float y)
     {
+        ghost.makeGhost = true;
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
         hasDashed = true;
 

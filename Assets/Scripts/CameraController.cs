@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
                 {
                     player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 }
-                bird.velocity = new Vector2(bird.velocity.x + 0.03f, bird.velocity.y + 0.03f);
+                bird.velocity = new Vector2(bird.velocity.x + 0.02f, bird.velocity.y + 0.02f);
             }
             if (lavaFirstTutorial)
             {
