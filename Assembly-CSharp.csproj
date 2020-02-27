@@ -63,19 +63,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Animations\RippleEffect\RippleEffect.cs" />
-    <Compile Include="Assets\Bird.cs" />
     <Compile Include="Assets\Scripts\Animations.cs" />
+    <Compile Include="Assets\Scripts\Bird.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Collision.cs" />
     <Compile Include="Assets\Scripts\Cubes.cs" />
     <Compile Include="Assets\Scripts\DashMove.cs" />
+    <Compile Include="Assets\Scripts\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\Jump.cs" />
     <Compile Include="Assets\Scripts\LavaCollide.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
+    <Compile Include="Assets\Scripts\RippleEffect\RippleEffect.cs" />
     <Compile Include="Assets\Scripts\TutorialFall.cs" />
-    <None Include="Assets\Animations\RippleEffect\RippleEffect.shader" />
+    <None Include="Assets\Scripts\RippleEffect\RippleEffect.shader" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/steel/Game-Dev-Coursework/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>

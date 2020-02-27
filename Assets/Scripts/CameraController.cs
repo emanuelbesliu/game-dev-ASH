@@ -20,7 +20,13 @@ public class CameraController : MonoBehaviour
             wall.SetActive(true);
             if(bird.gameObject.activeInHierarchy)
             {
-                bird.velocity = new Vector2(bird.velocity.x + 0.04f, bird.velocity.y + 0.03f);
+                player.GetComponent<Movement>().canMove = false;
+                player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, player.GetComponent<Rigidbody2D>().velocity.y);
+                if(player.GetComponent<Collision>().onGround)
+                {
+                    player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                }
+                bird.velocity = new Vector2(bird.velocity.x + 0.03f, bird.velocity.y + 0.03f);
             }
             if (lavaFirstTutorial)
             {

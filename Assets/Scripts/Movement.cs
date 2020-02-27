@@ -81,8 +81,11 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
-            tutorial = true;
-            checkTutorial = false;
+            if (this.transform.position.x < -12)
+            {
+                tutorial = true;
+                checkTutorial = false;
+            }
             GetComponent<TutorialFall>().detectionFall.gameObject.SetActive(true);
             GetComponent<TutorialFall>().timestop.gameObject.SetActive(true);
             GetComponent<TutorialFall>().platform.gravityScale = 0;
