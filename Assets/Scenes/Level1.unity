@@ -6497,6 +6497,7 @@ MonoBehaviour:
   destroyCube: -15
   cube: {fileID: 1536235807}
   cube2: {fileID: 1251960458}
+  bird: {fileID: 0}
   gravity: 1
 --- !u!20 &839446207
 Camera:
@@ -11519,7 +11520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251960458}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.41, y: 15.01, z: 0}
+  m_LocalPosition: {x: 9.19, y: 15.13, z: 0}
   m_LocalScale: {x: 3.8740492, y: 3.8740492, z: 3.8740492}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11710,7 +11711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253129808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.56, y: -10.05, z: 0}
+  m_LocalPosition: {x: -5.86, y: -9.88, z: 0}
   m_LocalScale: {x: -4.375691, y: 4.375691, z: 4.375691}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11750,8 +11751,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03191624, y: -0.030265171}
-  m_Size: {x: 0.8310456, y: 0.8310456}
+  m_Offset: {x: -0.025746884, y: 0.024749389}
+  m_Size: {x: 0.6547643, y: 0.72101665}
   m_Direction: 0
 --- !u!114 &1253129814
 MonoBehaviour:
@@ -11930,7 +11931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389470346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.35, y: 15.68, z: 0}
+  m_LocalPosition: {x: -9.88, y: -9.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1622026491}
@@ -13060,6 +13061,7 @@ MonoBehaviour:
   destroyCube: -15
   cube: {fileID: 1536235807}
   cube2: {fileID: 1251960458}
+  bird: {fileID: 1253129808}
   gravity: 1
 --- !u!81 &2080847027
 AudioListener:
