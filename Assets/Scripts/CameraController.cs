@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public GameObject wall;
     public Rigidbody2D bird;
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if(player.transform.position.x>-11)
         {
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
                 {
                     player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 }
-                bird.velocity = new Vector2(bird.velocity.x + 0.03f, bird.velocity.y + 0.03f);
+                bird.velocity = new Vector2(bird.velocity.x + 0.07f, bird.velocity.y + 0.07f);
             }
             if (lavaFirstTutorial)
             {

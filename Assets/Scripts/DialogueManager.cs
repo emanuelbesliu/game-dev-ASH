@@ -7,8 +7,11 @@ public class DialogueManager : MonoBehaviour
 {
 
 	public Text dialogueText;
+	public GameObject dBox; 
 
-	public Animator animator;
+	private Animator animator;
+
+	public bool dialogActive;
 
 	private Queue<string> sentences;
 
@@ -16,6 +19,12 @@ public class DialogueManager : MonoBehaviour
 	void Start()
 	{
 		sentences = new Queue<string>();
+	}
+
+	void Update(){
+		if(dialogActive && Input.GetKeyDown("Interact")){
+			
+		}
 	}
 
 	public void StartDialogue(Dialogue dialogue)

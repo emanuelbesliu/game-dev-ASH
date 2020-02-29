@@ -34,7 +34,7 @@ public class Cubes : MonoBehaviour
 
             if(bird.activeInHierarchy && gos.name == "lava2(Clone)"){
                 Vector3 direction = bird.transform.position - gos.transform.position;
-                gos.GetComponent<Rigidbody2D>().AddForce(0.19f * direction);
+                gos.GetComponent<Rigidbody2D>().AddForce(0.09f * direction);
             }
    		}
     }
