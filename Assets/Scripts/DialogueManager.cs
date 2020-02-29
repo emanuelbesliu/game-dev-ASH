@@ -7,66 +7,28 @@ public class DialogueManager : MonoBehaviour
 {
 
 	public Text dialogueText;
-	public GameObject dBox; 
-
-	private Animator animator;
+	public Text dialogueText2;
+	public Text dialogueText3;
+	public Text dialogueText4;
+	public GameObject dBox;
+	public GameObject dBox2;
+	public GameObject dBox3;
+	public GameObject dBox4;
 
 	public bool dialogActive;
+	public bool dialogActive2;
+	public bool dialogActive3;
+	public bool dialogActive4;
 
-	private Queue<string> sentences;
-
-	// Use this for initialization
 	void Start()
 	{
-		sentences = new Queue<string>();
+		dBox.SetActive(false);
+		dBox2.SetActive(false);
+		dBox3.SetActive(false);
+		dBox4.SetActive(false);
+
 	}
 
 	void Update(){
-		if(dialogActive && Input.GetKeyDown("Interact")){
-			
-		}
 	}
-
-	public void StartDialogue(Dialogue dialogue)
-	{
-		animator.SetBool("IsOpen", true);
-
-		sentences.Clear();
-
-		foreach (string sentence in dialogue.sentences)
-		{
-			sentences.Enqueue(sentence);
-		}
-
-		DisplayNextSentence();
-	}
-
-	public void DisplayNextSentence()
-	{
-		if (sentences.Count == 0)
-		{
-			EndDialogue();
-			return;
-		}
-
-		string sentence = sentences.Dequeue();
-		StopAllCoroutines();
-		StartCoroutine(TypeSentence(sentence));
-	}
-
-	IEnumerator TypeSentence(string sentence)
-	{
-		dialogueText.text = "";
-		foreach (char letter in sentence.ToCharArray())
-		{
-			dialogueText.text += letter;
-			yield return null;
-		}
-	}
-
-	void EndDialogue()
-	{
-		animator.SetBool("IsOpen", false);
-	}
-
 }

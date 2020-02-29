@@ -41,6 +41,7 @@ public class Movement : MonoBehaviour
     private bool hasDashed;
     private bool lavaTouch;
     public bool side = true;
+    public bool room2 = false;
 
     public Vector3 playerPos;
     
@@ -347,6 +348,12 @@ public class Movement : MonoBehaviour
         {
             GroundTouch();
             StartCoroutine(ObjectReset(other.gameObject));
+        }
+        if(other.gameObject.name=="AdditionalPopUp")
+        {
+            room2 = true;
+            playerPos = new Vector2(-6.5f, -9.651905f);
+
         }
     }
 

@@ -49,6 +49,6 @@ public class Cubes : MonoBehaviour
     }
     public void LavaTutorial()
     {      
-        Instantiate(cube2, new Vector3(6f, 30, 0), Quaternion.identity);
+        Instantiate(cube2, new Vector3(71f, 30, 0), Quaternion.identity);
     }
 }
