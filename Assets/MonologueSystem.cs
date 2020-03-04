@@ -7,20 +7,24 @@ public class MonologueSystem : MonoBehaviour
     private DialogueManager dM;
     public Queue<string> queue;
     public string[] sentences;
+    public string[] sentences12;
     public string[] sentences2;
     public string[] sentences3;
     public string[] sentences4;
     public bool camera = false;
+    public bool camera12 = false;
     public bool camera2 = false;
     public bool camera3 = false;
     public bool camera4 = false;
     public GameObject popUp1;
+    public GameObject popUp12;
     public GameObject popUp2;
     public GameObject popUp3;
     public GameObject popUp4;
     public GameObject popUp2Off;
-    public int step;
+    public float step;
     private string dialogue;
+    private int count = 0;
 
 
     void Start()
@@ -35,6 +39,8 @@ public class MonologueSystem : MonoBehaviour
     {
         if (dM.dialogActive && Input.GetButtonDown("Interact"))
             DisplayNextSentence(dM.dBox,popUp1,dM.dialogActive);
+        else if (dM.dialogActive12 && Input.GetButtonDown("Interact"))
+            DisplayNextSentence(dM.dBox12, popUp12, dM.dialogActive12);
         else if (dM.dialogActive2 && Input.GetButtonDown("Interact"))
             DisplayNextSentence(dM.dBox2, popUp2, dM.dialogActive2);
         else if (dM.dialogActive3 && Input.GetButtonDown("Interact"))
@@ -43,6 +49,8 @@ public class MonologueSystem : MonoBehaviour
             DisplayNextSentence(dM.dBox4, popUp4, dM.dialogActive4);
         if (step == 1)
             dM.dialogueText.text = dialogue;
+        else if (step == 1.5f)
+            dM.dialogueText12.text = dialogue;
         else if (step == 2)
             dM.dialogueText2.text = dialogue;
         else if (step == 3)
@@ -63,6 +71,9 @@ public class MonologueSystem : MonoBehaviour
     {
         if(other.gameObject.name=="FirstPopUp")
         {
+            gameObject.GetComponent<Movement>().anim.SetHorizontalMovement(0, 0, 0);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            gameObject.GetComponent<Movement>().canMove = false;
             resetQueue(sentences);
             step = 1;
             camera = true;
@@ -71,10 +82,24 @@ public class MonologueSystem : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeSentence(queue.Dequeue()));
         }
-        if (other.gameObject.name == "FirstPopUpOff")
+        if (other.gameObject.name== "FirstSecondPopUp")
         {
-            camera = false;
+            count++;
+            if (count == 3)
+            {
+                //gameObject.GetComponent<Movement>().anim.SetHorizontalMovement(0, 0, 0);
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                gameObject.GetComponent<Movement>().canMove = false;
+                resetQueue(sentences12);
+                step = 1.5f;
+                camera12 = true;
+                dM.dBox12.SetActive(true);
+                dM.dialogActive12 = true;
+                StopAllCoroutines();
+                StartCoroutine(TypeSentence(queue.Dequeue()));
+            }
         }
+
         if (other.gameObject.name == "SecondPopUp")
         {
             resetQueue(sentences2);
@@ -86,10 +111,7 @@ public class MonologueSystem : MonoBehaviour
             StartCoroutine(TypeSentence(queue.Dequeue()));
             popUp2Off.SetActive(true);
         }
-        if (other.gameObject.name == "SecondPopUpOff")
-        {
-            camera2 = false;
-        }
+
         if (other.gameObject.name == "ThirdPopUp")
         {
             resetQueue(sentences3);
@@ -100,10 +122,7 @@ public class MonologueSystem : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeSentence(queue.Dequeue()));
         }
-        if (other.gameObject.name == "ThirdPopUpOff")
-        {
-            camera3 = false;
-        }
+
         if (other.gameObject.name == "FourthPopUp")
         {
             gameObject.GetComponent<Movement>().room2 = false;
@@ -115,10 +134,7 @@ public class MonologueSystem : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeSentence(queue.Dequeue()));
         }
-        if (other.gameObject.name == "FourthPopUpOff")
-        {
-            camera4 = false;
-        }
+
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -127,6 +143,12 @@ public class MonologueSystem : MonoBehaviour
             dM.dBox.SetActive(false);
             dM.dialogActive = false;
             resetQueue(sentences);
+        }
+        if (other.gameObject.name == "FirstSecondPopUp")
+        {
+            dM.dBox12.SetActive(false);
+            dM.dialogActive12 = false;
+            resetQueue(sentences12);
         }
         if (other.gameObject.name == "SecondPopUp")
         {
@@ -154,6 +176,12 @@ public class MonologueSystem : MonoBehaviour
             d.SetActive(false);
             dA = false;
             p.SetActive(false);
+            gameObject.GetComponent<Movement>().canMove = true;
+            camera = false;
+            camera12 = false;
+            camera2 = false;
+            camera3 = false;
+            camera4 = false;
             return;
         }
         string sentence = queue.Dequeue();

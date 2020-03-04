@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     public SpriteRenderer sp;
     private Color defaultCol;
     private Collision coll;
-    private Animations anim;
+    public Animations anim;
     public Ghost ghost;
     [HideInInspector]
     public Rigidbody2D rb;
@@ -69,7 +69,8 @@ public class Movement : MonoBehaviour
         Vector2 dir = new Vector2(x, y);
 
         Walk(dir);
-        anim.SetHorizontalMovement(x, y, rb.velocity.y);
+        if(canMove)
+            anim.SetHorizontalMovement(x, y, rb.velocity.y);
 
         if (coll.onGround && !isDashing)
         {
@@ -108,7 +109,6 @@ public class Movement : MonoBehaviour
         }
         if ((coll.onLava|| coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp) && canMove)
         {
-            Debug.Log("Helloooooo");
             lavaCollide = true;
             sp.color = new Color(255, 0, 0);
             if (coll.onLava && canMove)
@@ -176,8 +176,8 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Grab") && coll.onWall && canMove)
         {
             if (side != coll.wallSide)
-                anim.Flip(side == true ? false : true);
-            if(!wallSlide){
+                anim.Flip(side ? false : true);
+            if (!wallSlide){
                 wallGrab = true;
                 wallSlide = false;
             }
@@ -247,7 +247,7 @@ public class Movement : MonoBehaviour
 
         if (wallGrab || !canMove)
             return;
-        if ( x > 0 )
+        if ( x > 0 && !wallSlide && canMove)
         {
             side = true;
             anim.Flip(side);
@@ -257,7 +257,7 @@ public class Movement : MonoBehaviour
             ghost.makeGhost = false; 
         }
         
-        if(x<0)
+        if(x<0 && !wallSlide && canMove)
         {
             side = false;
             anim.Flip(side);
@@ -307,11 +307,6 @@ public class Movement : MonoBehaviour
     }
 
     private void JumpWhileWall(){
-        if ((side && coll.onRightWall)||!side && coll.onRightWall )
-        {
-            side &= false;
-            anim.Flip(side);
-        }
         if (Input.GetButtonDown("Jump") && wallGrab){
             wallGrab =  false;
             rb.gravityScale = 3;

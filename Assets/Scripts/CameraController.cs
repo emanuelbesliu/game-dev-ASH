@@ -5,6 +5,8 @@ public class CameraController : MonoBehaviour
     public float panSteps = 0.5f; 
     private float currentStep;
     private float currentStep2;
+    private float currentStep12;
+    private float currentStep23;
     private float currentStep3;
     private float currentStep4;
     private float currentStep5;
@@ -16,6 +18,7 @@ public class CameraController : MonoBehaviour
     public Camera cameratarget;
     public Camera camera2;
     public Camera cameratutorial;
+    public Camera cameratutorial12;
     public Camera cameratutorial2;
     public Camera cameratutorial3;
     public Camera cameratutorial4;
@@ -36,7 +39,6 @@ public class CameraController : MonoBehaviour
         if (player.GetComponent<Movement>().room2)
         {
             player.GetComponent<MonologueSystem>().step = 0;
-            Debug.Log("Pulapula");
             currentStep9 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(oldposition, camera2.transform.position, currentStep9 / panSteps);
             this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(oldfieldofview, camera2.fieldOfView, currentStep9 / panSteps);
@@ -55,6 +57,20 @@ public class CameraController : MonoBehaviour
             currentStep2 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep2 / (panSteps+2f));
             this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(this.GetComponent<Camera>().fieldOfView, oldfieldofview, currentStep2 / (panSteps+2f));
+        }
+        else if (player.GetComponent<MonologueSystem>().camera12 && player.GetComponent<MonologueSystem>().step == 1.5f)
+        {
+            currentStep23 = 0;
+            currentStep12 += Time.deltaTime;
+            this.transform.position = Vector3.Lerp(oldposition, cameratutorial12.transform.position, currentStep12 / panSteps);
+            this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(oldfieldofview, cameratutorial12.fieldOfView, currentStep12 / panSteps);
+        }
+        else if (!player.GetComponent<MonologueSystem>().camera12 && player.GetComponent<MonologueSystem>().step == 1.5f)
+        {
+            currentStep12 = 0;
+            currentStep23 += Time.deltaTime;
+            this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep23 / (panSteps + 2f));
+            this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(this.GetComponent<Camera>().fieldOfView, oldfieldofview, currentStep23 / (panSteps + 2f));
         }
         else if (player.GetComponent<MonologueSystem>().camera2 && player.GetComponent<MonologueSystem>().step == 2)
         {
