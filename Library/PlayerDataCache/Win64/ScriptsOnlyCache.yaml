@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - DialogueManager
     - Ghost
     - Jump
+    - LevelLoader
     - MonologueSystem
     - Movement
     - RippleEffect
@@ -86,45 +87,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 574}
+      Script: {instanceID: 572}
     - Class: 114
-      Script: {instanceID: 11428}
+      Script: {instanceID: 12302}
     - Class: 114
-      Script: {instanceID: 11442}
+      Script: {instanceID: 12316}
     - Class: 114
-      Script: {instanceID: 11448}
+      Script: {instanceID: 12322}
     - Class: 114
-      Script: {instanceID: 11558}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 11596}
+      Script: {instanceID: 12468}
     - Class: 114
-      Script: {instanceID: 11848}
+      Script: {instanceID: 12716}
     - Class: 114
-      Script: {instanceID: 11864}
+      Script: {instanceID: 12732}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 12742}
     - Class: 114
-      Script: {instanceID: 11942}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 11960}
+      Script: {instanceID: 12828}
     - Class: 114
-      Script: {instanceID: 12010}
+      Script: {instanceID: 12874}
     - Class: 114
-      Script: {instanceID: 12096}
+      Script: {instanceID: 12962}
     - Class: 114
-      Script: {instanceID: 12538}
+      Script: {instanceID: 13140}
     - Class: 114
-      Script: {instanceID: 12616}
+      Script: {instanceID: 13392}
     - Class: 114
-      Script: {instanceID: 12638}
+      Script: {instanceID: 13470}
     - Class: 114
-      Script: {instanceID: 12674}
+      Script: {instanceID: 13492}
     - Class: 114
-      Script: {instanceID: 12720}
+      Script: {instanceID: 13528}
     - Class: 114
-      Script: {instanceID: 12960}
+      Script: {instanceID: 13574}
     - Class: 114
-      Script: {instanceID: 18158}
+      Script: {instanceID: 13810}
+    - Class: 114
+      Script: {instanceID: 19158}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -146,6 +149,95 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/Scenes/Level2.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 62
+      Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 572}
+    - Class: 114
+      Script: {instanceID: 12302}
+    - Class: 114
+      Script: {instanceID: 12316}
+    - Class: 114
+      Script: {instanceID: 12322}
+    - Class: 114
+      Script: {instanceID: 12468}
+    - Class: 114
+      Script: {instanceID: 12716}
+    - Class: 114
+      Script: {instanceID: 12742}
+    - Class: 114
+      Script: {instanceID: 12828}
+    - Class: 114
+      Script: {instanceID: 12874}
+    - Class: 114
+      Script: {instanceID: 12962}
+    - Class: 114
+      Script: {instanceID: 13392}
+    - Class: 114
+      Script: {instanceID: 13470}
+    - Class: 114
+      Script: {instanceID: 13492}
+    - Class: 114
+      Script: {instanceID: 13574}
+    - Class: 114
+      Script: {instanceID: 19158}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
       Script: {instanceID: 0}
     - Class: 19719996
       Script: {instanceID: 0}
@@ -170,7 +262,7 @@ ScriptsOnlyBuild:
     className: RippleEffect
   - hash:
       serializedVersion: 2
-      Hash: 90939c433e3aa8d2d8bc1973ba16d298
+      Hash: f4237e9c3ababb5d25868a0a1c5b1ee9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraController
@@ -278,7 +370,7 @@ ScriptsOnlyBuild:
     className: TutorialFall
   - hash:
       serializedVersion: 2
-      Hash: 654d9e3a1237c1d10ce024bbc30da48b
+      Hash: 3cc36508f06794e13143a3c74143a1d8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DialogueManager
@@ -308,7 +400,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: b8f7eb6f3b92f951185af2188f57cbe2
+      Hash: ae4f3afc9cd10189993a15f990d70cee
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Collision
@@ -366,6 +458,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Tilemap.Extras.dll
     namespaceName: UnityEngine
     className: HexagonalRuleTile
+  - hash:
+      serializedVersion: 2
+      Hash: dfa91685779b2faa1f0290ce01147bd7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MonologueSystem
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -446,7 +544,7 @@ ScriptsOnlyBuild:
     className: TerrainTile
   - hash:
       serializedVersion: 2
-      Hash: 898a97f76582e5720f97912e99e603ce
+      Hash: 277395101e953e6f5607f12efe7513c0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Movement
@@ -500,11 +598,12 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: 2e56d2950c9757ba9c5b3feacca56e02
+      Hash: 3328037aa14609c741f6ee27e2dccd51
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: MonologueSystem
+    className: LevelLoader
   platform: 19
   scenePathNames:
   - Assets/Scenes/Level1.unity
-  playerPath: C:/Users/steel/Game-Dev-Coursework/Alpha/Coursework1.exe
+  - Assets/Scenes/Level2.unity
+  playerPath: C:/Users/steel/Game-Dev-Coursework/Alpha4/Coursework1.exe

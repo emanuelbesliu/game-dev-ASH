@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Movement : MonoBehaviour
     public Ghost ghost;
     [HideInInspector]
     public Rigidbody2D rb;
+    public LevelLoader ll;
     private float time;
 
     [Space]
@@ -56,11 +58,16 @@ public class Movement : MonoBehaviour
         canMove = false;
         playerPos = transform.position;
         rb.gravityScale = 0;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            StartCoroutine(AutomaticJump());
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         //Debug.Log("X este: " + x + " Y este: " + y);
@@ -82,7 +89,7 @@ public class Movement : MonoBehaviour
         /*if(coll.hitObject && canMove){
             GroundTouch();
         }*/
-        if (transform.position.y < -30)
+        if (transform.position.y < -30 && SceneManager.GetActiveScene().buildIndex==0)
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
@@ -96,6 +103,11 @@ public class Movement : MonoBehaviour
             GetComponent<TutorialFall>().platform.gravityScale = 0;
             GetComponent<TutorialFall>().platform.gameObject.SetActive(true);
             GetComponent<TutorialFall>().platform.transform.position = GetComponent<TutorialFall>().platformPosition;
+        }
+        if (transform.position.y < 44 && SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            rb.velocity = new Vector2(0, 0);
+            transform.position = playerPos;
         }
         foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
             if (coll.onLava || coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp)
@@ -281,7 +293,7 @@ public class Movement : MonoBehaviour
         rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
     }
 
-    private void Jump(Vector2 dir)
+    public void Jump(Vector2 dir)
     {   
         if((Time.time - time) < grabTime){
             rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -416,5 +428,20 @@ public class Movement : MonoBehaviour
         other.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
         other.gameObject.SetActive(true);
+    }
+    IEnumerator AutomaticJump()
+    {
+        yield return new WaitForSeconds(1f);
+        Jump(new Vector2(0, 2f));
+        yield return new WaitForSeconds(0.2f);
+        rb.velocity = new Vector2(-10, rb.velocity.y);
+        anim.Flip(!side);
+        yield return new WaitForSeconds(0.2f);
+        tilemap.gameObject.SetActive(true);
+        canMove = true;
+        rb.gravityScale = 3;
+        tutorial = false;
+        start = true;
+        playerPos = transform.position;
     }
 }

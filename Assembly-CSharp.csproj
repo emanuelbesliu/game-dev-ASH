@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Jump.cs" />
     <Compile Include="Assets\Scripts\LavaCollide.cs" />
+    <Compile Include="Assets\Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\RippleEffect\RippleEffect.cs" />
     <Compile Include="Assets\Scripts\TutorialFall.cs" />
