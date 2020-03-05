@@ -43,9 +43,9 @@ public class Cubes : MonoBehaviour
         random = (Random.value > 0.5f);
         if (lavaFall)
             if(random)
-    	        Instantiate(cube, new Vector3(Random.Range(-9.52f, 41.05f), 30, 0), Quaternion.identity);
+    	        Instantiate(cube, new Vector3(Random.Range(48f, 106f), 30, 0), Quaternion.identity);
             else
-                Instantiate(cube2, new Vector3(Random.Range(-9.52f, 41.05f), 30, 0), Quaternion.identity);
+                Instantiate(cube2, new Vector3(Random.Range(48f, 106f), 30, 0), Quaternion.identity);
     }
     public void LavaTutorial()
     {      

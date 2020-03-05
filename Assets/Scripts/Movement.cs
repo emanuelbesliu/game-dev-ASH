@@ -34,6 +34,7 @@ public class Movement : MonoBehaviour
     public bool firstGrab;
     public bool tutorial = true;
     public bool checkTutorial = false;
+    public bool start = false;
 
     [Space]
 
@@ -52,8 +53,9 @@ public class Movement : MonoBehaviour
         coll = GetComponent<Collision>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animations>();
-        canMove = true;
+        canMove = false;
         playerPos = transform.position;
+        rb.gravityScale = 0;
     }
 
     // Update is called once per frame
@@ -201,7 +203,7 @@ public class Movement : MonoBehaviour
         }
         else
         { 
-            if(!checkTutorial)
+            if(!checkTutorial && start)
                 rb.gravityScale = 3; 
             if(coll.onWall)
                 JumpWhileWall();
@@ -347,7 +349,7 @@ public class Movement : MonoBehaviour
         if(other.gameObject.name=="AdditionalPopUp")
         {
             room2 = true;
-            playerPos = new Vector2(-6.5f, -9.651905f);
+            playerPos = new Vector2(-6.720411f, -9.548742f);
 
         }
     }

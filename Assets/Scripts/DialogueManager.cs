@@ -11,11 +11,13 @@ public class DialogueManager : MonoBehaviour
 	public Text dialogueText2;
 	public Text dialogueText3;
 	public Text dialogueText4;
+	public Text dialogueStartText;
 	public GameObject dBox;
 	public GameObject dBox12;
 	public GameObject dBox2;
 	public GameObject dBox3;
 	public GameObject dBox4;
+	public GameObject dStart;
 
 	public bool dialogActive;
 	public bool dialogActive12;
@@ -30,7 +32,6 @@ public class DialogueManager : MonoBehaviour
 		dBox2.SetActive(false);
 		dBox3.SetActive(false);
 		dBox4.SetActive(false);
-
 	}
 
 	void Update(){

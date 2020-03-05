@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
     private float currentStep7;
     private float currentStep8;
     private float currentStep9;
-    private bool lavaFirstTutorial = true;
     public Camera cameratarget;
     public Camera camera2;
     public Camera cameratutorial;
@@ -25,7 +24,6 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public GameObject wall;
     public GameObject wall2;
-    public Rigidbody2D bird;
     private Vector3 oldposition;
     private float oldfieldofview;
 
@@ -107,22 +105,7 @@ public class CameraController : MonoBehaviour
             this.transform.position = Vector3.Lerp(oldposition, cameratutorial4.transform.position, currentStep7 / panSteps);
             this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(oldfieldofview, cameratutorial4.fieldOfView, currentStep7 / panSteps);
             wall2.SetActive(true);
-            if (bird.gameObject.activeInHierarchy)
-            {
-                player.GetComponent<Movement>().canMove = false;
-                player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, player.GetComponent<Rigidbody2D>().velocity.y);
-                if (player.GetComponent<Collision>().onGround)
-                {
-                    player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                }
-                bird.velocity = new Vector2(bird.velocity.x + 0.07f, bird.velocity.y + 0.07f);
-            }
-            if (lavaFirstTutorial)
-            {
-                player.GetComponent<Movement>().playerPos = player.transform.position;
-                GetComponentInParent<Cubes>().LavaTutorial();
-                lavaFirstTutorial = false;
-            }
+           
         }
         else if (!player.GetComponent<MonologueSystem>().camera4 && player.GetComponent<MonologueSystem>().step == 4)
         {

@@ -34,7 +34,6 @@ public class TutorialFall : MonoBehaviour
             timestop.gameObject.SetActive(false);
             move.checkTutorial = true;
             move.canMove = false;
-            move.tutorial = false;
             move.gameObject.GetComponent<Rigidbody2D>().velocity = force;
             move.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             
