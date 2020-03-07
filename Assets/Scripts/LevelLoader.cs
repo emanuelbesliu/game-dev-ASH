@@ -7,10 +7,16 @@ public class LevelLoader : MonoBehaviour
     public Animator anim;
     public float transitionTime = 1f;
     public GameObject player;
+    public GameObject mainMenu;
     private void Update()
     {
-        if (player.transform.position.y >= 19.5 && player.transform.position.x>=95)
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+            if (player.transform.position.y >= 19.5 && player.transform.position.x>=95)
+                LoadNextLevel();
+        if (SceneManager.GetActiveScene().buildIndex==0 && mainMenu.GetComponent<MainMenu>().play && Input.GetKeyDown(KeyCode.Return))
+        {
             LoadNextLevel();
+        }
     }
     public void LoadNextLevel()
     {

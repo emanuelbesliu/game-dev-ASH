@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     public LevelLoader ll;
-    private float time;
+    public Camera camera;
 
     [Space]
     [Header("Forces")]
@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     public float dashSpeed = 30;
     public float slideSpeed = 5;
     public float grabTime = 2;
+    private float time;
 
     [Space]
     [Header("Checks")]
@@ -58,7 +59,7 @@ public class Movement : MonoBehaviour
         canMove = false;
         playerPos = transform.position;
         rb.gravityScale = 0;
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             StartCoroutine(AutomaticJump());
         }
@@ -89,7 +90,7 @@ public class Movement : MonoBehaviour
         /*if(coll.hitObject && canMove){
             GroundTouch();
         }*/
-        if (transform.position.y < -30 && SceneManager.GetActiveScene().buildIndex==0)
+        if (transform.position.y < -30 && SceneManager.GetActiveScene().buildIndex==1)
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
@@ -104,7 +105,7 @@ public class Movement : MonoBehaviour
             GetComponent<TutorialFall>().platform.gameObject.SetActive(true);
             GetComponent<TutorialFall>().platform.transform.position = GetComponent<TutorialFall>().platformPosition;
         }
-        if (transform.position.y < 44 && SceneManager.GetActiveScene().buildIndex == 1)
+        if (transform.position.y < 44 && SceneManager.GetActiveScene().buildIndex == 2)
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
@@ -443,5 +444,7 @@ public class Movement : MonoBehaviour
         tutorial = false;
         start = true;
         playerPos = transform.position;
+        camera.GetComponent<Cubes>().lavaFall = true;
+        camera.GetComponent<Cubes>().delay = 1f;
     }
 }
