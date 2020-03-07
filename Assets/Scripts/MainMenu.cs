@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public bool volume = false;
     public bool back = false;
 
+    public AudioManager aM;
     public GameObject playArrow;
     public GameObject optionsArrow;
     public GameObject exitArrow;
@@ -35,7 +36,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-
+        aM.Play("MainTheme");
     }
 
     void Update()
@@ -47,12 +48,14 @@ public class MainMenu : MonoBehaviour
 
             if (Input.GetKeyDown("down"))
             {
+                aM.Play("Cursor");
                 play = false;
                 options = true;
                 return;
             }
             if (Input.GetKeyDown("up"))
             {
+                aM.Play("Cursor");
                 play = false;
                 exit = true;
                 return;
@@ -72,6 +75,7 @@ public class MainMenu : MonoBehaviour
             optionsButton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                aM.Play("Confirm");
                 mainMenu.SetActive(false);
                 optionsMenu.SetActive(true);
                 options = false;
@@ -79,12 +83,14 @@ public class MainMenu : MonoBehaviour
             }
             if (Input.GetKeyDown("down"))
             {
+                aM.Play("Cursor");
                 exit = true;
                 options = false;
                 return;
             }
             if (Input.GetKeyDown("up"))
             {
+                aM.Play("Cursor");
                 options = false;
                 play = true;
                 return;
@@ -103,17 +109,20 @@ public class MainMenu : MonoBehaviour
             exitButton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                aM.Play("Confirm");
                 Debug.Log("Da merge");
                 Application.Quit();
             }
             if (Input.GetKeyDown("down"))
             {
+                aM.Play("Cursor");
                 exit = false;
                 play = true;
                 return;
             }
             if (Input.GetKeyDown("up"))
             {
+                aM.Play("Cursor");
                 exit = false;
                 options = true;
                 return;
@@ -132,22 +141,26 @@ public class MainMenu : MonoBehaviour
             volumeButton.SetActive(true);
             if(Input.GetKeyDown("left"))
                 {
+                aM.Play("Cursor");
                 slider.GetComponent<Slider>().value -= 0.05f;
                 return;
             }
             if (Input.GetKeyDown("right"))
             {
+                aM.Play("Cursor");
                 slider.GetComponent<Slider>().value+= 0.05f;
                 return;
             }
             if (Input.GetKeyDown("down"))
             {
+                aM.Play("Cursor");
                 back = true;
                 volume = false;
                 return;
             }
             if (Input.GetKeyDown("up"))
             {
+                aM.Play("Cursor");
                 back = true;
                 volume = false;
                 return;
@@ -166,6 +179,7 @@ public class MainMenu : MonoBehaviour
             backButton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                aM.Play("Back");
                 mainMenu.SetActive(true);
                 optionsMenu.SetActive(false);
                 back = false;
@@ -173,12 +187,14 @@ public class MainMenu : MonoBehaviour
             }
             if (Input.GetKeyDown("down"))
             {
+                aM.Play("Cursor");
                 back = false;
                 volume = true;
                 return;
             }
             if (Input.GetKeyDown("up"))
             {
+                aM.Play("Cursor");
                 back = false;
                 volume = true;
                 return;

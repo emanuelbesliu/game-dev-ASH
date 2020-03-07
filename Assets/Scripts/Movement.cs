@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     public LevelLoader ll;
     public Camera camera;
+    public Canvas canvas;
 
     [Space]
     [Header("Forces")]
@@ -25,6 +26,8 @@ public class Movement : MonoBehaviour
     public float dashSpeed = 30;
     public float slideSpeed = 5;
     public float grabTime = 2;
+    public float oldGravity;
+    public Vector2 oldVelocity;
     private float time;
 
     [Space]
@@ -63,6 +66,9 @@ public class Movement : MonoBehaviour
         {
             StartCoroutine(AutomaticJump());
         }
+        InvokeRepeating("PlayWalk", 0.0f, 0.35f);
+        InvokeRepeating("PlayClimb", 0.0f, 0.35f);
+
     }
 
     // Update is called once per frame
@@ -86,6 +92,22 @@ public class Movement : MonoBehaviour
         {
             GetComponent<Jump>().enabled = true;
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && !canvas.gameObject.activeInHierarchy)
+        {
+            canMove = false;
+            oldGravity = rb.gravityScale;
+            rb.gravityScale = 0;
+            oldVelocity = rb.velocity;
+            rb.velocity = new Vector2(0, 0);
+            canvas.gameObject.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && canvas.gameObject.activeInHierarchy)
+        {
+            rb.velocity = oldVelocity;
+            canMove = true;
+            rb.gravityScale = oldGravity;
+            canvas.gameObject.SetActive(false);
+        }
 
         /*if(coll.hitObject && canMove){
             GroundTouch();
@@ -94,6 +116,8 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
+            FindObjectOfType<AudioManager>().Play("Death");
+
             if (this.transform.position.x < -12)
             {
                 tutorial = true;
@@ -107,13 +131,15 @@ public class Movement : MonoBehaviour
         }
         if (transform.position.y < 44 && SceneManager.GetActiveScene().buildIndex == 2)
         {
+            FindObjectOfType<AudioManager>().Play("Death");
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
         }
         foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
             if (coll.onLava || coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp)
             {
-                if(gos.name == "Lav(Clone)"){
+                FindObjectOfType<AudioManager>().Play("Death");
+                if (gos.name == "Lav(Clone)"){
                     Destroy(gos);
                 }
                 lavaCollide = true;
@@ -124,6 +150,7 @@ public class Movement : MonoBehaviour
         }
         if ((coll.onLava|| coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp) && canMove)
         {
+            FindObjectOfType<AudioManager>().Play("Death");
             lavaCollide = true;
             sp.color = new Color(255, 0, 0);
             if (coll.onLava && canMove)
@@ -216,7 +243,7 @@ public class Movement : MonoBehaviour
         }
         else
         { 
-            if(!checkTutorial && start)
+            if(!checkTutorial && start && !canvas.gameObject.activeInHierarchy)
                 rb.gravityScale = 3; 
             if(coll.onWall)
                 JumpWhileWall();
@@ -279,6 +306,17 @@ public class Movement : MonoBehaviour
         }
     }
 
+    void PlayWalk()
+    {
+        if(Input.GetButton("Horizontal")&&coll.onGround&&!wallGrab)
+            FindObjectOfType<AudioManager>().Play("Walking");
+    }
+    void PlayClimb()
+    {
+        if (Input.GetButton("Vertical")&&wallGrab)
+            FindObjectOfType<AudioManager>().Play("Climb");
+    }
+
     void GroundTouch()
     {
         hasDashed = false;
@@ -295,8 +333,9 @@ public class Movement : MonoBehaviour
     }
 
     public void Jump(Vector2 dir)
-    {   
-        if((Time.time - time) < grabTime){
+    {
+        FindObjectOfType<AudioManager>().Play("Jump");
+        if ((Time.time - time) < grabTime){
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.velocity += dir * jumpForce;
         }
@@ -304,6 +343,7 @@ public class Movement : MonoBehaviour
 
     private void Dash(float x, float y)
     {
+        FindObjectOfType<AudioManager>().Play("Dash");
         ghost.makeGhost = true;
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
         hasDashed = true;
@@ -414,6 +454,7 @@ public class Movement : MonoBehaviour
 
     IEnumerator DisableMovement(float time)
     {
+
         canMove = false;
 
         yield return new WaitForSeconds(time);
@@ -426,6 +467,7 @@ public class Movement : MonoBehaviour
        
     IEnumerator ObjectReset(GameObject other)
     {
+        FindObjectOfType<AudioManager>().Play("Reset");
         other.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
         other.gameObject.SetActive(true);

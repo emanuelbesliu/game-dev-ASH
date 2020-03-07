@@ -15,6 +15,7 @@ public class LevelLoader : MonoBehaviour
                 LoadNextLevel();
         if (SceneManager.GetActiveScene().buildIndex==0 && mainMenu.GetComponent<MainMenu>().play && Input.GetKeyDown(KeyCode.Return))
         {
+            FindObjectOfType<AudioManager>().Play("Confirm");
             LoadNextLevel();
         }
     }

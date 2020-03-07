@@ -17,7 +17,17 @@ public class Cubes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Spawn", delay, delay);
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            gravity = 1;
+            InvokeRepeating("Spawn", delay, delay);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            gravity = 0.7f;
+            InvokeRepeating("Spawn", delay, delay);
+        }
+
     }
 
     // Update is called once per frame
@@ -42,12 +52,17 @@ public class Cubes : MonoBehaviour
     }
         void Spawn() {
             random = (Random.value > 0.5f);
-            if (lavaFall)
+            if (lavaFall&& SceneManager.GetActiveScene().buildIndex == 2)
                 if (random)
                     Instantiate(cube, new Vector3(Random.Range(-60f, 61f), 85, 0), Quaternion.identity);
                 else
                     Instantiate(cube2, new Vector3(Random.Range(-60f, 61f), 85, 0), Quaternion.identity);
-        }
+            else if (lavaFall && SceneManager.GetActiveScene().buildIndex == 1)
+                if (random)
+                    Instantiate(cube, new Vector3(Random.Range(44f, 109f), 27, 0), Quaternion.identity);
+                else
+                    Instantiate(cube2, new Vector3(Random.Range(44f, 109f), 27, 0), Quaternion.identity);
+    }
         public void LavaTutorial()
         {
             Instantiate(cube2, new Vector3(71f, 30, 0), Quaternion.identity);

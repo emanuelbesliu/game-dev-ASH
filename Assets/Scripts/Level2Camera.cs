@@ -16,6 +16,8 @@ public class Level2Camera : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Stop("Level1Music");
+        FindObjectOfType<AudioManager>().Play("Level2Music");
         oldposition = camera.transform.position;
         oldfieldofview = camera.GetComponent<Camera>().fieldOfView;
     }

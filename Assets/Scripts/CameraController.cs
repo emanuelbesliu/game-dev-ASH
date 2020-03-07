@@ -26,9 +26,11 @@ public class CameraController : MonoBehaviour
     public GameObject wall2;
     private Vector3 oldposition;
     private float oldfieldofview;
+    private Vector3 oldposition2;
 
     private void Start()
     {
+        oldposition2 = camera2.transform.position;
         oldposition = this.transform.position;
         oldfieldofview = this.GetComponent<Camera>().fieldOfView;
     }
@@ -44,6 +46,7 @@ public class CameraController : MonoBehaviour
         }
         if (player.GetComponent<MonologueSystem>().camera && player.GetComponent<MonologueSystem>().step == 1)
         {
+
             currentStep2 = 0;
             currentStep += Time.deltaTime;
             this.transform.position = Vector3.Lerp(oldposition, cameratutorial.transform.position, currentStep / panSteps);
@@ -51,6 +54,7 @@ public class CameraController : MonoBehaviour
         }
         else if(!player.GetComponent<MonologueSystem>().camera && player.GetComponent<MonologueSystem>().step == 1)
         {
+
             currentStep = 0;
             currentStep2 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep2 / (panSteps+2f));
@@ -58,6 +62,7 @@ public class CameraController : MonoBehaviour
         }
         else if (player.GetComponent<MonologueSystem>().camera12 && player.GetComponent<MonologueSystem>().step == 1.5f)
         {
+
             currentStep23 = 0;
             currentStep12 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(oldposition, cameratutorial12.transform.position, currentStep12 / panSteps);
@@ -65,6 +70,7 @@ public class CameraController : MonoBehaviour
         }
         else if (!player.GetComponent<MonologueSystem>().camera12 && player.GetComponent<MonologueSystem>().step == 1.5f)
         {
+
             currentStep12 = 0;
             currentStep23 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep23 / (panSteps + 2f));
@@ -72,6 +78,7 @@ public class CameraController : MonoBehaviour
         }
         else if (player.GetComponent<MonologueSystem>().camera2 && player.GetComponent<MonologueSystem>().step == 2)
         {
+
             currentStep4 = 0;
             currentStep3 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(oldposition, cameratutorial2.transform.position, currentStep3 / panSteps);
@@ -79,6 +86,7 @@ public class CameraController : MonoBehaviour
         }
         else if(!player.GetComponent<MonologueSystem>().camera2 && player.GetComponent<MonologueSystem>().step == 2)
         {
+
             currentStep3 = 0;
             currentStep4 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep4 / (panSteps + 2f));
@@ -86,6 +94,7 @@ public class CameraController : MonoBehaviour
         }
         else if (player.GetComponent<MonologueSystem>().camera3 && player.GetComponent<MonologueSystem>().step == 3)
         {
+
             currentStep6 = 0;
             currentStep5 += Time.deltaTime;
             this.transform.position = Vector3.Lerp(oldposition, cameratutorial3.transform.position, currentStep5 / panSteps);
@@ -100,15 +109,17 @@ public class CameraController : MonoBehaviour
         }
         else if (player.GetComponent<MonologueSystem>().camera4 && player.GetComponent<MonologueSystem>().step == 4)
         {
+
             currentStep8 = 0;
             currentStep7 += Time.deltaTime;
-            this.transform.position = Vector3.Lerp(oldposition, cameratutorial4.transform.position, currentStep7 / panSteps);
+            this.transform.position = Vector3.Lerp(oldposition2, cameratutorial4.transform.position, currentStep7 / panSteps);
             this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(oldfieldofview, cameratutorial4.fieldOfView, currentStep7 / panSteps);
             wall2.SetActive(true);
            
         }
         else if (!player.GetComponent<MonologueSystem>().camera4 && player.GetComponent<MonologueSystem>().step == 4)
         {
+
             currentStep7 = 0;
             currentStep8 += Time.deltaTime;
             oldposition = cameratarget.transform.position;

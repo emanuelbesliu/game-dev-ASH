@@ -31,6 +31,8 @@ public class MonologueSystem : MonoBehaviour
 
     void Start()
     {
+        FindObjectOfType<AudioManager>().Stop("MainTheme");
+        FindObjectOfType<AudioManager>().Play("Level1Music");
         queue = new Queue<string>();
         dM = FindObjectOfType<DialogueManager>();
         StopAllCoroutines();
@@ -47,7 +49,7 @@ public class MonologueSystem : MonoBehaviour
             {
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
-            bird.velocity = new Vector2(bird.velocity.x + 0.07f, bird.velocity.y + 0.07f);
+            bird.velocity = new Vector2(bird.velocity.x + 0.065f, bird.velocity.y + 0.07f);
         }
     }
     void Update()
@@ -55,6 +57,7 @@ public class MonologueSystem : MonoBehaviour
         if (dM.dStart.activeInHierarchy)
             if (Input.GetButtonDown("Yes"))
             {
+                FindObjectOfType<AudioManager>().Play("Confirm");
                 dM.dStart.SetActive(false);
                 gameObject.transform.position = (new Vector3(-6.720411f, -9.548742f, 0));
                 gameObject.GetComponent<Movement>().tutorial = false;
@@ -63,6 +66,7 @@ public class MonologueSystem : MonoBehaviour
             }
             else if (Input.GetButtonDown("No"))
             {
+                FindObjectOfType<AudioManager>().Play("Confirm");
                 dM.dStart.SetActive(false);
                 gameObject.GetComponent<Movement>().start = true;
                 gameObject.GetComponent<Movement>().canMove = true;
@@ -237,6 +241,8 @@ public class MonologueSystem : MonoBehaviour
             birdBool = true;
             gameObject.GetComponent<Movement>().playerPos = gameObject.transform.position;
             cameruta.GetComponent<Cubes>().LavaTutorial();
+            FindObjectOfType<AudioManager>().Play("Bird");
+
         }
         string sentence = queue.Dequeue();
         StopAllCoroutines();
