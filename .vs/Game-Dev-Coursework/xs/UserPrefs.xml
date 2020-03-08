@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{86517DA8-1846-51BF-1EF6-44A314A0F3FB}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MenuScript.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CameraController.cs" Line="21" Column="35" />
+      <File FileName="Assets/Scripts/Movement.cs" Line="100" Column="31" />
+      <File FileName="Assets/Scripts/MenuScript.cs" Line="160" Column="17" />
+      <File FileName="Assets/Scripts/AudioManager.cs" Line="26" Column="3" />
+      <File FileName="Assets/Scripts/CameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DialogueManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelLoader.cs" Line="14" Column="13" />
+      <File FileName="Assets/Scripts/MonologueSystem.cs" Line="257" Column="55" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Game-Dev-Coursework" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="MenuScript.cs" selected="True" />
+              </Node>
+              <Node name="TextMesh Pro" expanded="True">
+                <Node name="Examples &amp; Extras" expanded="True">
+                  <Node name="Scripts" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="81f2d067-8a83-4761-b1f8-71f6fad9f05f" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

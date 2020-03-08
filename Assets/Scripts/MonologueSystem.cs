@@ -28,7 +28,6 @@ public class MonologueSystem : MonoBehaviour
     private string dialogue;
     private int count = 0;
 
-
     void Start()
     {
         FindObjectOfType<AudioManager>().Stop("MainTheme");
@@ -37,6 +36,7 @@ public class MonologueSystem : MonoBehaviour
         dM = FindObjectOfType<DialogueManager>();
         StopAllCoroutines();
         StartCoroutine(TypeSentence("Do you want to skip the tutorial?"));
+        InvokeRepeating("PlayType", 0.0f, 0.4f);
     }
 
     private void FixedUpdate()
@@ -222,6 +222,8 @@ public class MonologueSystem : MonoBehaviour
     {
         if(queue.Count == 0)
         {
+            FindObjectOfType<AudioManager>().Play("Confirm");
+
             d.SetActive(false);
             dA = false;
             p.SetActive(false);
@@ -244,6 +246,9 @@ public class MonologueSystem : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Bird");
 
         }
+
+        FindObjectOfType<AudioManager>().Play("Confirm");
+
         string sentence = queue.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
@@ -254,8 +259,9 @@ public class MonologueSystem : MonoBehaviour
         dialogue="";
         foreach (char letter in sentence.ToCharArray())
         {
+            FindObjectOfType<AudioManager>().Play("Typing");
             dialogue += letter;
-            yield return null;
+            yield return new WaitForSeconds(Random.Range(0.007f, 0.10f));
         }
     }
 }

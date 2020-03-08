@@ -13,11 +13,11 @@ public class AudioManager : MonoBehaviour
 
 	void Awake()
 	{
-		if (instance != null)
-		{
-			Destroy(gameObject);
-		}
-		else
+		//if (instance != null)
+		//{
+		//	Destroy(gameObject);
+		//}
+		if (instance == null)
 		{
 			instance = this;
 			DontDestroyOnLoad(gameObject);
@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
 
 		s.source.Play();
 	}
+
 	public void Stop(string sound)
 	{
 		Sound s = Array.Find(sounds, item => item.name == sound);

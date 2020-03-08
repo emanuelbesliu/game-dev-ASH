@@ -71,6 +71,7 @@ public class Movement : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -92,6 +93,15 @@ public class Movement : MonoBehaviour
         {
             GetComponent<Jump>().enabled = true;
         }
+
+        if (this.transform.position.y >= 19.5 && this.transform.position.x >= 95)
+        {
+            rb.gravityScale = 0;
+            Debug.Log("AICI");
+            rb.velocity = new Vector2(0, rb.velocity.y+5f);
+            //StartCoroutine(AutomaticJump());
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && !canvas.gameObject.activeInHierarchy)
         {
             canMove = false;
@@ -99,6 +109,7 @@ public class Movement : MonoBehaviour
             rb.gravityScale = 0;
             oldVelocity = rb.velocity;
             rb.velocity = new Vector2(0, 0);
+            isDashing = false;
             canvas.gameObject.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && canvas.gameObject.activeInHierarchy)

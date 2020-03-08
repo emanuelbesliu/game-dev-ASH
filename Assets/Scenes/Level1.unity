@@ -17715,6 +17715,7 @@ MonoBehaviour:
   slideSpeed: 5
   grabTime: 2
   oldGravity: 0
+  oldVelocity: {x: 0, y: 0}
   canMove: 0
   isDashing: 0
   wallGrab: 0
@@ -32944,6 +32945,30 @@ PrefabInstance:
     - target: {fileID: 1787293068960606, guid: 37e271745bb0784409c0e9599a506030, type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787293845477657, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_text
+      value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787293845477657, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787293845477657, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787294123547158, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_text
+      value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787294123547158, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787294123547158, guid: 37e271745bb0784409c0e9599a506030, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37e271745bb0784409c0e9599a506030, type: 3}
