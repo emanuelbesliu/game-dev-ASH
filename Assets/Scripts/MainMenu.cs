@@ -32,10 +32,12 @@ public class MainMenu : MonoBehaviour
 
     public GameObject mainMenu;
     public GameObject optionsMenu;
-    public GameObject slider;
+    public Slider slider;
 
     void Start()
     {
+        slider.value = AudioListener.volume;
+        FindObjectOfType<AudioManager>().setVolume(slider.value);
         aM.Play("MainTheme");
     }
 
@@ -136,6 +138,7 @@ public class MainMenu : MonoBehaviour
         }
         if (volume)
         {
+            slider.value = AudioListener.volume;
             volumeArrow.SetActive(true);
             whiteVolumeButton.SetActive(false);
             volumeButton.SetActive(true);
@@ -143,12 +146,14 @@ public class MainMenu : MonoBehaviour
                 {
                 aM.Play("Cursor");
                 slider.GetComponent<Slider>().value -= 0.05f;
+                FindObjectOfType<AudioManager>().setVolume(slider.value);
                 return;
             }
             if (Input.GetKeyDown("right"))
             {
                 aM.Play("Cursor");
                 slider.GetComponent<Slider>().value+= 0.05f;
+                FindObjectOfType<AudioManager>().setVolume(slider.value);
                 return;
             }
             if (Input.GetKeyDown("down"))

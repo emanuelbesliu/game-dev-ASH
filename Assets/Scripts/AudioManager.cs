@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class AudioManager : MonoBehaviour
 	public AudioMixerGroup mixerGroup;
 
 	public Sound[] sounds;
+
+	public Slider slider;
 
 	void Awake()
 	{
@@ -32,6 +35,7 @@ public class AudioManager : MonoBehaviour
 			s.source.outputAudioMixerGroup = mixerGroup;
 		}
 	}
+
 
 	public void Play(string sound)
 	{
@@ -57,6 +61,11 @@ public class AudioManager : MonoBehaviour
 			return;
 		}
 		s.source.Stop();
+	}
+
+	public void setVolume(float volume)
+	{
+		AudioListener.volume = volume;
 	}
 
 }

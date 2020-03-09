@@ -12,6 +12,7 @@ public class Cubes : MonoBehaviour
     public GameObject cube;
     public GameObject cube2;
     public GameObject bird;
+    public Canvas canvas;
     public float gravity = 1;
 
     // Start is called before the first frame update
@@ -33,6 +34,8 @@ public class Cubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (canvas.gameObject.activeInHierarchy)
+            return;
         //cube2.transform.position = Vector3.MoveTowards(cube2.transform.position, bird.transform.position, .03f);
         foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")) {
             if ((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.transform.position.y > -300 && gos.GetComponent<Rigidbody2D>().gravityScale == 0) {
@@ -54,9 +57,9 @@ public class Cubes : MonoBehaviour
             random = (Random.value > 0.5f);
             if (lavaFall&& SceneManager.GetActiveScene().buildIndex == 2)
                 if (random)
-                    Instantiate(cube, new Vector3(Random.Range(-60f, 61f), 85, 0), Quaternion.identity);
+                    Instantiate(cube, new Vector3(Random.Range(-60f, 61f), 123  , 0), Quaternion.identity);
                 else
-                    Instantiate(cube2, new Vector3(Random.Range(-60f, 61f), 85, 0), Quaternion.identity);
+                    Instantiate(cube2, new Vector3(Random.Range(-60f, 61f), 123, 0), Quaternion.identity);
             else if (lavaFall && SceneManager.GetActiveScene().buildIndex == 1)
                 if (random)
                     Instantiate(cube, new Vector3(Random.Range(44f, 109f), 27, 0), Quaternion.identity);

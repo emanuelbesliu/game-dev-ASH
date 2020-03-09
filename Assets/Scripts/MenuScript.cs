@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class MenuScript : MonoBehaviour
 {
@@ -35,12 +31,13 @@ public class MenuScript : MonoBehaviour
     public GameObject menu;
     public GameObject optionsMenu;
     public GameObject helpMenu;
-    public GameObject slider;
+    public Slider slider;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        slider.value = AudioListener.volume;
+        FindObjectOfType<AudioManager>().setVolume(slider.value);
     }
 
     // Update is called once per frame
@@ -53,7 +50,17 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 FindObjectOfType<AudioManager>().Play("Confirm");
+                FindObjectOfType<Movement>().rb.velocity = FindObjectOfType<Movement>().oldVelocity;
+                FindObjectOfType<Movement>().canMove = true;
+                FindObjectOfType<Movement>().rb.gravityScale = FindObjectOfType<Movement>().oldGravity;
                 this.gameObject.SetActive(false);
+                FindObjectOfType<Cubes>().lavaFall = true;
+                foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava"))
+                    if ((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.GetComponent<Rigidbody2D>().gravityScale == 0)
+                    {
+                        gos.GetComponent<Rigidbody2D>().gravityScale = FindObjectOfType<Movement>().oldLavaGravity;
+                        gos.GetComponent<Rigidbody2D>().velocity = FindObjectOfType<Movement>().oldLavaVelocity;
+                    }
             }
             if (Input.GetKeyDown("down"))
             {
@@ -178,18 +185,21 @@ public class MenuScript : MonoBehaviour
         }
         if (volume)
         {
+            slider.value = AudioListener.volume;
             whiteVolumeButton.SetActive(false);
             volumeButton.SetActive(true);
             if (Input.GetKeyDown("left"))
             {
                 FindObjectOfType<AudioManager>().Play("Cursor");
                 slider.GetComponent<Slider>().value -= 0.05f;
+                FindObjectOfType<AudioManager>().setVolume(slider.value);
                 return;
             }
             if (Input.GetKeyDown("right"))
             {
                 FindObjectOfType<AudioManager>().Play("Cursor");
                 slider.GetComponent<Slider>().value += 0.05f;
+                FindObjectOfType<AudioManager>().setVolume(slider.value);
                 return;
             }
             if (Input.GetKeyDown("down"))

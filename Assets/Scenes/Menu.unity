@@ -590,7 +590,7 @@ MonoBehaviour:
   whiteBackButton: {fileID: 1578807998}
   mainMenu: {fileID: 574482738}
   optionsMenu: {fileID: 1294334354}
-  slider: {fileID: 671882981}
+  slider: {fileID: 671882983}
 --- !u!1 &235391393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -762.39996, y: 346.25003}
+  m_AnchoredPosition: {x: -780, y: 122}
   m_SizeDelta: {x: 270.8, y: 289.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &671882981
@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1727,7 +1727,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.4, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1828,7 +1828,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
+  m_MinParticleSize: 0.004
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
@@ -2563,7 +2563,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 21.92
+      value: 66.3
       mode: 0
       spread: 0
       speed:
@@ -6515,7 +6515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943239367}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 115.7, y: 14.6, z: -24.143215}
+  m_LocalPosition: {x: 163.1, y: 13.2, z: -24.143215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7370,7 +7370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -608.1, y: 302.1}
+  m_AnchoredPosition: {x: -625.70013, y: 77.85002}
   m_SizeDelta: {x: 579.4, y: 377.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1390605945
@@ -8522,6 +8522,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 3452136287880246208, guid: f25e493b32779b340a90a987ffc4174e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4454085004242758335, guid: f25e493b32779b340a90a987ffc4174e,
         type: 3}
       propertyPath: mainMenu
@@ -8621,8 +8626,8 @@ RectTransform:
   m_Father: {fileID: 267814094}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.4, y: 0}
+  m_AnchorMax: {x: 0.4, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8994,6 +8999,11 @@ PrefabInstance:
       propertyPath: sounds.Array.data[13].pitch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6442577599002765781, guid: a03ba6af2cedd7d42a64cc0b1dc17cff,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 671882983}
     - target: {fileID: 6442577599002765782, guid: a03ba6af2cedd7d42a64cc0b1dc17cff,
         type: 3}
       propertyPath: m_Name

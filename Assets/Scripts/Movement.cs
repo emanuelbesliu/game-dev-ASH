@@ -27,7 +27,9 @@ public class Movement : MonoBehaviour
     public float slideSpeed = 5;
     public float grabTime = 2;
     public float oldGravity;
+    public float oldLavaGravity;
     public Vector2 oldVelocity;
+    public Vector2 oldLavaVelocity;
     private float time;
 
     [Space]
@@ -51,7 +53,7 @@ public class Movement : MonoBehaviour
     public bool room2 = false;
 
     public Vector3 playerPos;
-    
+
 
     void Start()
     {
@@ -86,7 +88,7 @@ public class Movement : MonoBehaviour
         Vector2 dir = new Vector2(x, y);
 
         Walk(dir);
-        if(canMove)
+        if (canMove)
             anim.SetHorizontalMovement(x, y, rb.velocity.y);
 
         if (coll.onGround && !isDashing)
@@ -97,23 +99,26 @@ public class Movement : MonoBehaviour
         if (this.transform.position.y >= 19.5 && this.transform.position.x >= 95)
         {
             rb.gravityScale = 0;
-            Debug.Log("AICI");
-            rb.velocity = new Vector2(0, rb.velocity.y+5f);
+            rb.velocity = new Vector2(0, rb.velocity.y + 5f);
             //StartCoroutine(AutomaticJump());
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !canvas.gameObject.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Escape) && !canvas.gameObject.activeInHierarchy && start)
         {
-            canMove = false;
-            oldGravity = rb.gravityScale;
-            rb.gravityScale = 0;
-            oldVelocity = rb.velocity;
-            rb.velocity = new Vector2(0, 0);
-            isDashing = false;
-            canvas.gameObject.SetActive(true);
+            if (SceneManager.GetActiveScene().buildIndex == 1 && gameObject.transform.position.x>48f) { 
+                if (!FindObjectOfType<Cubes>().bird.gameObject.activeInHierarchy)
+                    esc();}
+            else esc();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && canvas.gameObject.activeInHierarchy)
         {
+            FindObjectOfType<Cubes>().lavaFall = true;
+            foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava"))
+                if ((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.GetComponent<Rigidbody2D>().gravityScale == 0f)
+                {
+                    gos.GetComponent<Rigidbody2D>().gravityScale = oldLavaGravity;
+                    gos.GetComponent<Rigidbody2D>().velocity = oldLavaVelocity;
+                }
             rb.velocity = oldVelocity;
             canMove = true;
             rb.gravityScale = oldGravity;
@@ -123,7 +128,7 @@ public class Movement : MonoBehaviour
         /*if(coll.hitObject && canMove){
             GroundTouch();
         }*/
-        if (transform.position.y < -30 && SceneManager.GetActiveScene().buildIndex==1)
+        if (transform.position.y < -30 && SceneManager.GetActiveScene().buildIndex == 1)
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
@@ -146,20 +151,20 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             transform.position = playerPos;
         }
-        foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")){
+        /*foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava")) {
             if (coll.onLava || coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp)
             {
                 FindObjectOfType<AudioManager>().Play("Death");
-                if (gos.name == "Lav(Clone)"){
+                if (gos.name == "Lav(Clone)") {
                     Destroy(gos);
                 }
                 lavaCollide = true;
                 sp.color = new Color(255, 0, 0);
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+0.5f);
-                StartCoroutine(DisableMovement(.4f));  
-            }       
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 0.5f);
+                StartCoroutine(DisableMovement(.4f));
+            }
         }
-        if ((coll.onLava|| coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp) && canMove)
+        if ((coll.onLava || coll.onLavaLeft || coll.onLavaRight || coll.onLavaUp || coll.onLavaLeftDown || coll.onLavaLeftUp || coll.onLavaRightDown || coll.onLavaRightUp) && canMove)
         {
             FindObjectOfType<AudioManager>().Play("Death");
             lavaCollide = true;
@@ -197,30 +202,30 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x - 2, rb.velocity.y - 2);
             }
             StartCoroutine(DisableMovement(.4f));
-        }
+        }*/
         if (Input.GetButtonDown("Jump") && canMove)
         {
             anim.SetTrigger("Jump");
-            if (coll.onGround){
+            if (coll.onGround) {
                 //rb.gravityScale = 3;
                 Jump(Vector2.up);
             }
         }
 
-        if(!wallSlide && !wallGrab && !isDashing && !lavaCollide){
+        if (!wallSlide && !wallGrab && !isDashing && !lavaCollide) {
             sp.color = defaultCol;
         }
 
         if (Input.GetButtonDown("Boost") && !hasDashed && !tutorial)
         {
-            if(!tutorial)
+            if (!tutorial)
             {
                 canMove = true;
                 checkTutorial = false;
             }
             wallGrab = false;
-            if (xRaw != 0 || yRaw != 0){
-                sp.color = new Color(0,191,255);
+            if (xRaw != 0 || yRaw != 0) {
+                sp.color = new Color(0, 191, 255);
                 Dash(xRaw, yRaw);
                 //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
             }
@@ -230,7 +235,7 @@ public class Movement : MonoBehaviour
         {
             if (side != coll.wallSide)
                 anim.Flip(side ? false : true);
-            if (!wallSlide){
+            if (!wallSlide) {
                 wallGrab = true;
                 wallSlide = false;
             }
@@ -253,14 +258,14 @@ public class Movement : MonoBehaviour
             JumpWhileWall();
         }
         else
-        { 
-            if(!checkTutorial && start && !canvas.gameObject.activeInHierarchy)
-                rb.gravityScale = 3; 
-            if(coll.onWall)
+        {
+            if (!checkTutorial && start && !canvas.gameObject.activeInHierarchy)
+                rb.gravityScale = 3;
+            if (coll.onWall)
                 JumpWhileWall();
         }
 
-        if (coll.onWall && hasDashed){
+        if (coll.onWall && hasDashed) {
             hasDashed = true;
             isDashing = false;
         }
@@ -270,21 +275,21 @@ public class Movement : MonoBehaviour
         else if (wallGrab)
             firstGrab = false;
 
-        if(firstGrab){
-                time = Time.time;
+        if (firstGrab) {
+            time = Time.time;
         }
 
-        if(!coll.onGround && wallGrab){
+        if (!coll.onGround && wallGrab) {
 
             //Debug.Log("elapsed time: " + (Time.time - time));
-            if((Time.time - time) >= grabTime){
+            if ((Time.time - time) >= grabTime) {
                 wallSlide = true;
                 sp.color = new Color(255, 0, 0);
                 WallSlide();
             }
         }
 
-        if(!coll.onWall || coll.onGround) wallSlide = false;
+        if (!coll.onWall || coll.onGround) wallSlide = false;
 
 
         if (coll.onGround && !groundTouch)
@@ -300,17 +305,17 @@ public class Movement : MonoBehaviour
 
         if (wallGrab || !canMove)
             return;
-        if ( x > 0 && !wallSlide && canMove)
+        if (x > 0 && !wallSlide && canMove)
         {
             side = true;
             anim.Flip(side);
         }
 
-        if(!isDashing){
-            ghost.makeGhost = false; 
+        if (!isDashing) {
+            ghost.makeGhost = false;
         }
-        
-        if(x<0 && !wallSlide && canMove)
+
+        if (x < 0 && !wallSlide && canMove)
         {
             side = false;
             anim.Flip(side);
@@ -319,12 +324,12 @@ public class Movement : MonoBehaviour
 
     void PlayWalk()
     {
-        if(Input.GetButton("Horizontal")&&coll.onGround&&!wallGrab)
+        if (Input.GetButton("Horizontal") && coll.onGround && !wallGrab)
             FindObjectOfType<AudioManager>().Play("Walking");
     }
     void PlayClimb()
     {
-        if (Input.GetButton("Vertical")&&wallGrab)
+        if (Input.GetButton("Vertical") && wallGrab)
             FindObjectOfType<AudioManager>().Play("Climb");
     }
 
@@ -346,7 +351,7 @@ public class Movement : MonoBehaviour
     public void Jump(Vector2 dir)
     {
         FindObjectOfType<AudioManager>().Play("Jump");
-        if ((Time.time - time) < grabTime){
+        if ((Time.time - time) < grabTime) {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.velocity += dir * jumpForce;
         }
@@ -363,18 +368,18 @@ public class Movement : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         Vector2 dir = new Vector2(x, y);
-        if (y!=0&&x==0)
-            rb.velocity += dir.normalized * dashSpeed/2;
-        else if(y!=0)
+        if (y != 0 && x == 0)
+            rb.velocity += dir.normalized * dashSpeed / 2;
+        else if (y != 0)
             rb.velocity += dir.normalized * dashSpeed / 1.5f;
         else
             rb.velocity += dir.normalized * dashSpeed;
         StartCoroutine(DashWait());
     }
 
-    private void JumpWhileWall(){
-        if (Input.GetButtonDown("Jump") && wallGrab){
-            wallGrab =  false;
+    private void JumpWhileWall() {
+        if (Input.GetButtonDown("Jump") && wallGrab) {
+            wallGrab = false;
             rb.gravityScale = 3;
             Jump(Vector2.up);
         }
@@ -385,7 +390,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.tag == "Reset")
         {
             Vector3 hitPosition = Vector3.zero;
-            foreach (ContactPoint2D hit in collision.contacts){
+            foreach (ContactPoint2D hit in collision.contacts) {
                 //Debug.Log(hit.point);
                 hitPosition.x = hit.point.x - 0.2f;
                 hitPosition.y = hit.point.y - 0.2f;
@@ -405,20 +410,30 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Reset"))
+        if (other.gameObject.CompareTag("Reset"))
         {
             GroundTouch();
             StartCoroutine(ObjectReset(other.gameObject));
         }
-        if(other.gameObject.name=="AdditionalPopUp")
+        if (other.gameObject.name == "AdditionalPopUp")
         {
             room2 = true;
             playerPos = new Vector2(-6.720411f, -9.548742f);
 
         }
+        if (other.gameObject.CompareTag("Lava"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 0.5f);
+            FindObjectOfType<AudioManager>().Play("Death");
+            foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava"))
+                if (gos.name == "Lav(Clone)")
+                    Destroy(gos);
+            lavaCollide = true;
+            sp.color = new Color(255, 0, 0);
+            StartCoroutine(DisableMovement(.25f));
+        }
     }
-
-    private void WallSlide(){
+    private void WallSlide() {
         if (side != coll.wallSide)
             anim.Flip(side == true ? false : true);
 
@@ -426,14 +441,14 @@ public class Movement : MonoBehaviour
 
         bool pushingWall = false;
 
-        if((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall)){
+        if ((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall)) {
             pushingWall = true;
         }
 
         float push = pushingWall ? 0 : rb.velocity.x;
 
         //rb.velocity = new Vector2(push, -slideSpeed);
-        if (Input.GetButtonDown("Jump")){
+        if (Input.GetButtonDown("Jump")) {
             //wallGrab =  false;
             rb.gravityScale = 3;
             Jump(Vector2.up);
@@ -442,6 +457,28 @@ public class Movement : MonoBehaviour
 
         //GetComponent<Renderer>().material.color = new Color(255, 255, 255);
     }
+
+    private void esc(){
+        FindObjectOfType<Cubes>().lavaFall = false;
+        foreach (GameObject gos in GameObject.FindGameObjectsWithTag("Lava"))
+            if ((gos.name == "lava(Clone)" || gos.name == "lava2(Clone)") && gos.GetComponent<Rigidbody2D>().gravityScale != 0f)
+            {
+                oldLavaGravity = gos.GetComponent<Rigidbody2D>().gravityScale;
+                oldLavaVelocity = gos.GetComponent<Rigidbody2D>().velocity;
+                gos.GetComponent<Rigidbody2D>().gravityScale = 0f;
+                gos.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+            }
+
+        canMove = false;
+        oldGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        oldVelocity = rb.velocity;
+        rb.velocity = new Vector2(0, 0);
+        isDashing = false;
+        canvas.gameObject.SetActive(true);
+    }
+
 
     IEnumerator DashWait(){
         StartCoroutine(GroundDash());

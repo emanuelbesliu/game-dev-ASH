@@ -1,7 +1,0 @@
-2/3 mape - 3 ore
-sunete - melodie/melodie meniu, sarit, alergat, dash, murit, cola, slide, climb - 3 ore
-meniu - start, exit, settings, in joc - exit to meniu,help,settings - 3 ore
-other - aranjat cod
-
-bonus - "stamina bar", 
-
