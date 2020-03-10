@@ -570,7 +570,7 @@ MonoBehaviour:
   play: 1
   options: 0
   exit: 0
-  volume: 1
+  volume: 0
   back: 0
   aM: {fileID: 1916787583}
   playArrow: {fileID: 958494432}

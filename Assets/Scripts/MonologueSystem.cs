@@ -41,6 +41,7 @@ public class MonologueSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (bird.gameObject.activeInHierarchy && birdBool)
         {
             gameObject.GetComponent<Movement>().canMove = false;
@@ -169,6 +170,11 @@ public class MonologueSystem : MonoBehaviour
 
         if (other.gameObject.name == "FourthPopUp")
         {
+            if (!bird.gameObject.activeInHierarchy)
+            {
+                bird.gameObject.SetActive(true);
+            }
+
             gameObject.GetComponent<Movement>().tutorial = true;
             gameObject.GetComponent<Movement>().anim.SetHorizontalMovement(0, 0, 0);
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
