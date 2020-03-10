@@ -7,19 +7,14 @@ public class AudioManager : MonoBehaviour
 {
 
 	public static AudioManager instance;
-
 	public AudioMixerGroup mixerGroup;
-
 	public Sound[] sounds;
-
 	public Slider slider;
+	public int deathCount = 0;
 
 	void Awake()
 	{
-		//if (instance != null)
-		//{
-		//	Destroy(gameObject);
-		//}
+
 		if (instance == null)
 		{
 			instance = this;

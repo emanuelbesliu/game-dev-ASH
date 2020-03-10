@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
@@ -40,12 +38,6 @@ public class Collision : MonoBehaviour
     public Vector2 rightDownOffset;
     public Vector2 leftDownOffset;
     public Vector2 upOffset;
-    private Color debugCollisionColor = Color.red;
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

@@ -7,6 +7,10 @@ public class Sound {
 	public string name;
 
 	public AudioClip clip;
+	public AudioMixerGroup mixerGroup;
+
+	[HideInInspector]
+	public AudioSource source;
 
 	[Range(0f, 1f)]
 	public float volume = .75f;
@@ -20,9 +24,5 @@ public class Sound {
 
 	public bool loop = false;
 
-	public AudioMixerGroup mixerGroup;
-
-	[HideInInspector]
-	public AudioSource source;
 
 }

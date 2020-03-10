@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-	public float ghostDelay;
+    public GameObject ghost;
+
+    public float ghostDelay;
 	private float ghostDelaySeconds;
-	public GameObject ghost;
-	public bool makeGhost = false; 
+	public bool makeGhost = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class Ghost : MonoBehaviour
         	}else{
         		GameObject currentObject = Instantiate(ghost, transform.position, transform.rotation); 
         		Sprite currentSprite = GetComponentInChildren<SpriteRenderer>().sprite;
-        		//currentObject.transform.localScale = this.transform.localScale;
+
         		currentObject.GetComponentInChildren<SpriteRenderer>().sprite = currentSprite; 
         		ghostDelaySeconds = ghostDelay;
         		Destroy(currentObject, 0.22f); 

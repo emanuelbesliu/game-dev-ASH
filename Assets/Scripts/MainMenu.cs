@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -39,6 +37,8 @@ public class MainMenu : MonoBehaviour
         slider.value = AudioListener.volume;
         FindObjectOfType<AudioManager>().setVolume(slider.value);
         aM.Play("MainTheme");
+
+        Cursor.visible = false;
     }
 
     void Update()
@@ -211,9 +211,5 @@ public class MainMenu : MonoBehaviour
             whiteBackButton.SetActive(true);
             backButton.SetActive(false);
         }
-
-
-
     }
-
 }

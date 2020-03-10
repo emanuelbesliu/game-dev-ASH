@@ -1,28 +1,32 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MonologueSystem : MonoBehaviour
 {
     private DialogueManager dM;
     public Queue<string> queue;
-    public string[] sentences;
-    public string[] sentences12;
-    public string[] sentences2;
-    public string[] sentences3;
-    public string[] sentences4;
-    public bool camera = false;
-    public bool camera12 = false;
-    public bool camera2 = false;
-    public bool camera3 = false;
-    public bool camera4 = false;
+    public Camera cameruta;
+
     public GameObject popUp1;
     public GameObject popUp12;
     public GameObject popUp2;
     public GameObject popUp3;
     public GameObject popUp4;
     public Rigidbody2D bird;
-    public Camera cameruta;
+
+    public string[] sentences;
+    public string[] sentences12;
+    public string[] sentences2;
+    public string[] sentences3;
+    public string[] sentences4;
+
+    public bool camera = false;
+    public bool camera12 = false;
+    public bool camera2 = false;
+    public bool camera3 = false;
+    public bool camera4 = false;
+
     private bool birdBool=false;
     public float step;
     private string dialogue;
@@ -32,10 +36,13 @@ public class MonologueSystem : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Stop("MainTheme");
         FindObjectOfType<AudioManager>().Play("Level1Music");
+
         queue = new Queue<string>();
         dM = FindObjectOfType<DialogueManager>();
+
         StopAllCoroutines();
         StartCoroutine(TypeSentence("Do you want to skip the tutorial?"));
+
         InvokeRepeating("PlayType", 0.0f, 0.4f);
     }
 
@@ -53,6 +60,7 @@ public class MonologueSystem : MonoBehaviour
             bird.velocity = new Vector2(bird.velocity.x + 0.065f, bird.velocity.y + 0.07f);
         }
     }
+
     void Update()
     {
         if (dM.dStart.activeInHierarchy)
@@ -106,6 +114,7 @@ public class MonologueSystem : MonoBehaviour
             queue.Enqueue(sentence);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.name=="FirstPopUp")
@@ -196,6 +205,7 @@ public class MonologueSystem : MonoBehaviour
             gameObject.GetComponent<Movement>().tutorial = false;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.name == "FirstPopUp")
@@ -224,6 +234,7 @@ public class MonologueSystem : MonoBehaviour
             dM.dialogActive4 = false;
         }
     }
+
     public void DisplayNextSentence(GameObject d, GameObject p,bool dA)
     {
         if(queue.Count == 0)
@@ -232,16 +243,19 @@ public class MonologueSystem : MonoBehaviour
 
             d.SetActive(false);
             dA = false;
+
             p.SetActive(false);
             if (p.name != "ThirdPopUp")
                 gameObject.GetComponent<Movement>().canMove = true;
             if (p.name == "ThirdPopUp" || p.name == "FourthPopUp") 
                 gameObject.GetComponent<Movement>().tutorial = false;
+
             camera = false;
             camera12 = false;
             camera2 = false;
             camera3 = false;
             camera4 = false;
+
             return;
         }
         if(queue.Count==1&&p.name=="FourthPopUp")
@@ -260,14 +274,15 @@ public class MonologueSystem : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
 
     }
+
     IEnumerator TypeSentence(string sentence)
     {
         dialogue="";
         foreach (char letter in sentence.ToCharArray())
         {
-            FindObjectOfType<AudioManager>().Play("Typing");
+            //FindObjectOfType<AudioManager>().Play("Typing");
             dialogue += letter;
-            yield return new WaitForSeconds(Random.Range(0.007f, 0.10f));
+            yield return new WaitForSeconds(Random.Range(0.001f, 0.05f));
         }
     }
 }

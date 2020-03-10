@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public Animator anim;
-    public float transitionTime = 1f;
     public GameObject player;
     public GameObject mainMenu;
+
+    public float transitionTime = 1f;
+
     private void Update()
     {
         if(SceneManager.GetActiveScene().buildIndex == 1)
@@ -19,6 +21,7 @@ public class LevelLoader : MonoBehaviour
             LoadNextLevel();
         }
     }
+
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
@@ -27,9 +30,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevel(int levelIndex)
     {
         anim.SetTrigger("Start");
-
         yield return new WaitForSeconds(transitionTime);
-
         SceneManager.LoadScene(levelIndex);
     }
 }

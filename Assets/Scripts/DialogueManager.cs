@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -12,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 	public Text dialogueText3;
 	public Text dialogueText4;
 	public Text dialogueStartText;
+
 	public GameObject dBox;
 	public GameObject dBox12;
 	public GameObject dBox2;
@@ -32,8 +31,5 @@ public class DialogueManager : MonoBehaviour
 		dBox2.SetActive(false);
 		dBox3.SetActive(false);
 		dBox4.SetActive(false);
-	}
-
-	void Update(){
 	}
 }

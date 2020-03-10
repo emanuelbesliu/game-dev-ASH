@@ -4,8 +4,10 @@ public class TutorialFall : MonoBehaviour
 {
     public Rigidbody2D platform;
     public Vector2 platformPosition;
+
     public Collider2D detectionFall;
     public Collider2D timestop;
+
     private Movement move;
     private Vector2 force;
 

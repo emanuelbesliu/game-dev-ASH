@@ -2,7 +2,9 @@
 
 public class CameraController : MonoBehaviour
 {
-    public float panSteps = 0.5f; 
+    public float panSteps = 0.5f;
+    private float oldfieldofview;
+
     private float currentStep;
     private float currentStep2;
     private float currentStep12;
@@ -14,6 +16,7 @@ public class CameraController : MonoBehaviour
     private float currentStep7;
     private float currentStep8;
     private float currentStep9;
+
     public Camera cameratarget;
     public Camera camera2;
     public Camera cameratutorial;
@@ -21,11 +24,12 @@ public class CameraController : MonoBehaviour
     public Camera cameratutorial2;
     public Camera cameratutorial3;
     public Camera cameratutorial4;
+
     public GameObject player;
     public GameObject wall;
     public GameObject wall2;
+
     private Vector3 oldposition;
-    private float oldfieldofview;
     private Vector3 oldposition2;
 
     private void Start()
@@ -34,6 +38,7 @@ public class CameraController : MonoBehaviour
         oldposition = this.transform.position;
         oldfieldofview = this.GetComponent<Camera>().fieldOfView;
     }
+
     void FixedUpdate()
     {
         if (player.GetComponent<Movement>().room2)
@@ -125,18 +130,6 @@ public class CameraController : MonoBehaviour
             oldposition = cameratarget.transform.position;
             this.transform.position = Vector3.Lerp(this.transform.position, oldposition, currentStep8 / (panSteps + 2f));
             this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(this.GetComponent<Camera>().fieldOfView, oldfieldofview, currentStep8 / (panSteps + 2f));
-        }
-        //if (player.transform.position.x>-10.5)
-        //{
-            //currentStep += Time.deltaTime;
-            //currentStep2 += Time.deltaTime;
-            //oldposition = this.transform.position;
-            //this.transform.position = Vector3.Lerp(oldposition, cameratarget.transform.position, currentStep / panSteps);
-            //this.GetComponent<Camera>().fieldOfView = Mathf.Lerp(this.GetComponent<Camera>().fieldOfView, oldfieldofview, currentStep2 / (panSteps + 2f));
-            
-            
-            //GetComponentInParent<Cubes>().lavaFall = true;
-        //}
-        
+        }   
     }
 }
