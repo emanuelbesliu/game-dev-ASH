@@ -135,9 +135,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13066}
     - Class: 114
-      Script: {instanceID: 13130}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13202}
+      Script: {instanceID: 13200}
     - Class: 114
       Script: {instanceID: 13322}
     - Class: 114
@@ -256,9 +256,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13066}
     - Class: 114
-      Script: {instanceID: 13130}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13202}
+      Script: {instanceID: 13200}
     - Class: 114
       Script: {instanceID: 13322}
     - Class: 114
@@ -427,7 +427,7 @@ ScriptsOnlyBuild:
     className: CameraController
   - hash:
       serializedVersion: 2
-      Hash: 01712d2f9f30c35c698654f446b58f69
+      Hash: 064c5f98edbaa25b134074bcc6b44ef7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelLoader
@@ -727,7 +727,7 @@ ScriptsOnlyBuild:
     className: Benchmark03
   - hash:
       serializedVersion: 2
-      Hash: 58fbcf338a31c559e335a4097dfee90e
+      Hash: d3688fe576c4ccce330f74096c2d2a15
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Level2Camera
@@ -1027,7 +1027,7 @@ ScriptsOnlyBuild:
     className: HexagonalRuleTile
   - hash:
       serializedVersion: 2
-      Hash: dfa91685779b2faa1f0290ce01147bd7
+      Hash: 3d535491bc57d25946318a4547b6976a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MonologueSystem
@@ -1045,7 +1045,7 @@ ScriptsOnlyBuild:
     className: VertexShakeA
   - hash:
       serializedVersion: 2
-      Hash: b605b1bd86b2d37696642c51282c3b8c
+      Hash: 86a0264662b51ea565da2b06b9135c45
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EndingMovement
@@ -1099,7 +1099,7 @@ ScriptsOnlyBuild:
     className: Benchmark04
   - hash:
       serializedVersion: 2
-      Hash: 73fe214ae91f4b9c7e311f27ff909695
+      Hash: 2e6b7176a697cccc5d0f9a506928879c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ghost
@@ -1129,7 +1129,7 @@ ScriptsOnlyBuild:
     className: ChatController
   - hash:
       serializedVersion: 2
-      Hash: bf4e8351e2d5e2bf50dd8580b08b2959
+      Hash: f2270b57f5bea40aeeff70bdcccbef5a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Cubes
@@ -1171,7 +1171,7 @@ ScriptsOnlyBuild:
     className: TerrainTile
   - hash:
       serializedVersion: 2
-      Hash: 20ac46d7dcfd9c45f105835b8793e9fe
+      Hash: 073ae5cde53b6bd1c6c8f2110d7ffa7f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Movement
@@ -1255,7 +1255,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: d0a91448cbac7813bb841b35e5d611ce
+      Hash: d50d899629d00d92813d5dc36c02344b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -1282,4 +1282,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Level1.unity
   - Assets/Scenes/Level2.unity
-  playerPath: C:/Users/steel/Game-Dev-Coursework/Beta1/Coursework1.exe
+  playerPath: C:/Users/steel/GameDev/Ash Beta 0.3/Coursework1.exe

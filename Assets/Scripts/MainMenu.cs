@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        FindObjectOfType<AudioManager>().deathCount = 0;
         slider.value = AudioListener.volume;
         FindObjectOfType<AudioManager>().setVolume(slider.value);
         aM.Play("MainTheme");
