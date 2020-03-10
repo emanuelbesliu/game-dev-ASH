@@ -250,8 +250,9 @@ public class Movement : MonoBehaviour
         {
             sp.color = defaultCol;
             rb.gravityScale = 0;
-            if (x > .2f || x < -.2f)
-                rb.velocity = new Vector2(rb.velocity.x, 0);
+            /*if (x > .2f || x < -.2f)
+                rb.velocity = new Vector2(rb.velocity.x, 0);*/
+            rb.velocity = new Vector2(0, rb.velocity.y);
             float speedModifier = y > 0 ? .5f : 1;
 
             rb.velocity = new Vector2(rb.velocity.x, y * (speed * speedModifier));
