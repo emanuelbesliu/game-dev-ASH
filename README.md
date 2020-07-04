@@ -12,6 +12,9 @@ This is a Unity project, in order to edit it, you will need a newer version of U
 For the game itself please visit [itch.io](https://eduardalexandrupop.itch.io/ash).
 
 ## Screenshots
+<img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/TitleScreen.png" width="500">
+<img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/DialogueScreen.png" width="500">
+<img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/InGameScreen.png" width="500">
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
