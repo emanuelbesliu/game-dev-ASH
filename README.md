@@ -14,7 +14,7 @@ For the game itself please visit [itch.io](https://eduardalexandrupop.itch.io/as
 ## Screenshots
 <img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/TitleScreen.png" width="500">
 <img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/DialogueScreen.png" width="500">
-<img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/InGameScreen.png" width="500">
+<img src="https://github.com/eduardalexandrupop/Ash/blob/master/Assets/Backgrounds/ezgif.com-video-to-gif.gif" width="500">
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
