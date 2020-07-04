@@ -13,9 +13,6 @@ For the game itself please visit [itch.io](https://eduardalexandrupop.itch.io/as
 
 ## Screenshots
 
-## Libraries used
-- [A* Pathfinding Project](https://arongranberg.com/astar/)
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
