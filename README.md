@@ -1,4 +1,7 @@
 # Ash
+
+[![GitHub contributors](https://img.shields.io/github/contributors/emanuelbesliu/game-dev-ASH.svg)](https://github.com/emanuelbesliu/game-dev-ASH/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/emanuelbesliu/game-dev-ASH.svg)](https://github.com/emanuelbesliu/game-dev-ASH/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://choosealicense.com/licenses/mit/)
+
 Ash is a 2D platformer videogame prototype with gameplay mechanics based on parkour jumps and grabs.
 You play as Ash, a cola-powered robot sent from the future to save the city from a nearby volcano which begins errupting at the start of the game. Save the city by climbing the mountain in order to use your powers to cool the volcano!
 
